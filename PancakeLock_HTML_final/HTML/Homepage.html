@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <title data-origin="Pancakelock">Pancakelock</title>
+</head>
+
+<body class="day-mode">
+  
+    
+    <nav class="navbar navbar-expand-md navbar-light pl-0 pr-0 border-bottom">
+      <div class="container">
+        <a class="navbar-brand light-mode" href="#"><img src="Image/Header_Logo.svg" alt="logo"></a>
+        <a class="navbar-brand dark-mode" href="#"><img src="Image/Header_Logo1.svg" alt="logo"></a>
+      <ul class="navbar-nav right_menu ml-md-auto position-relative float-right order-sm-5 ">
+        
+        <!-- user area -->
+       
+        <li class="nav-item mr-sm-4 mr-1 d-flex border-yellow">
+          <span class="mt-1"><img src="./Image/Language.svg"></span>
+          <select class="selectpicker form-control" data-live-search="true" data-default="India"
+          data-flag="true">
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="Australia">Australia</option>
+        <option value="South Africa">South Africa</option>
+      </select>
+        </li>
+        
+        <li class="nav-item mr-sm-2 mr-1 mr-sm-4">
+          <div class="switcher">
+            <button class="day btn btn-switch"><img class="v-btn" src="Image/Light-Mode.svg"></button>
+            <button class="night btn btn-switch"><img src="Image/Dark_Mode.svg"></button>
+        </div>
+        </li>
+        <li class="nav-item dropdown dropdown-md dropdown-hover show menu-li mr-sm-2 mr-1 mr-sm-4">
+          <a class="nav-icon dropdown-toggle" id="navbarDropdown-7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <img src="Image/Menu.svg" alt="setting icon">
+          </a>
+          <div class="dropdown-menu position-absolute" aria-labelledby="navbarDropdown-7">
+            <div class="row gutter-2">
+              <div class="col-12">
+                
+                <ul class="nav flex-column text-drop">
+                  <li class="nav-item py-2">
+                    <a class="text-primary active" href="#"><img class="mr-2" src="Image/About.svg">About</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Docs.svg"> Docs</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Audit.svg">Audit</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Lock.svg"> Safu Tokens</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Dex.svg"> Plock DEX</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="btn btn-primary d-block text-white" href="./Create Lock.html">Safu Lock</a>
+                  </li>
+                </ul>
+              </div>
+              
+            </div>
+          </div>
+        </li>
+      </div>
+      </ul>
+    </nav>
+    <div class="bg-body">
+    <section class="hero_banner banner-sec banner-v2 banner-v3">
+      <div class="container text-center py-4">
+        <h1 class="font-40 text-yellow font-extrabold">Pancakelock</h1>
+        <p class="font-16">A Trusted and Safu Liquidity locker for the Community</p>
+      </div>
+  </section>
+  <section class="box-part">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="features-inner features-set shadow-sm d-flex">
+         
+          <div class="left-part">
+            <p class=" font-14 text-gray font-weight-normal text-uppercase">Total LP Locked Value </p>
+              <h2 class="font-20 font-extrabold mb-1">$ 275,892,17</h2>
+          </div>
+          <div class="right-part">
+            <p class="font-12 text-yellow mb-0 text-center">+8.50%</p>
+            <div>
+              <canvas id="chLine1" style="display: block;width: 74px;height: 48px;"></canvas>
+              </div>
+          </div>
+
+        </div>
+        </div>
+        <div class="col-md-4">
+          <div class="features-inner features-set shadow-sm d-flex">
+         
+            <div class="left-part">
+              <p class="font-12 text-gray font-weight-normal text-uppercase">Projects Locked </p>
+                <h2 class="font-20 font-extrabold mb-1">44,635</h2>
+            </div>
+            <div class="right-part">
+              <p class="font-14 text-yellow mb-0 text-center">+6.10%</p>
+              <div>
+                <canvas id="chLine2" style="display: block;width: 74px;height: 48px;"></canvas>
+                </div>
+            </div>
+  
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="features-inner features-set shadow-sm d-flex">
+         
+            <div class="left-part">
+              <p class=" font-12 text-gray font-weight-normal text-uppercase">Total Token Locked Value</p>
+                <h2 class="font-20 font-extrabold mb-1">$ 44,635,447</h2>
+            </div>
+            <div class="right-part">
+              <p class="font-14 text-yellow mb-0 text-center">+3.14%</p>
+              <div>
+                <canvas id="chLine3" style="display: block;width: 74px;height: 48px;"></canvas>
+                </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+            <div class="table-filter font-14 shadow-sm">
+              <div class="px-4 position-relative">
+                <button type="submit" class="set-search"><img src="./Image/Search.svg"></button>
+              <input class="form-control" id="myInput" type="text" placeholder="Search here..">
+            </div>
+            
+              <table class="table">
+                <thead>
+                  <tr class="text-yellow font-semibold">
+                    <th scope="col" class="border-0 pl-4">Token</th>
+                    <th scope="col" class="border-0">Total LP locked</th>
+                    <th scope="col" class="border-0">Locked Date</th>
+                    <th scope="col" class="border-0">Unlock Date</th>
+                  </tr>
+                </thead>
+                <tbody id="myTable" class="font-semibold text-primary">
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Bitcoin (BTC)</a></th>
+                    <td>78,0000</td>
+                    <td>17-03-2021</td>
+                    <td>17-06-2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Ethereum (ETH)</a></th>
+                    <td>18,0000</td>
+                    <td>15-03-2021</td>
+                    <td>15-06-2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Binance Coin (BNB)</a></th>
+                    <td>60,0000</td>
+                    <td>10-05-2021</td>
+                    <td>12-08-2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Polkadot (DOT)</a></th>
+                    <td>38,0000</td>
+                    <td>11-08-2021</td>
+                    <td>18-09-2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Litecoin (LTC)</a></th>
+                    <td>45,0000</td>
+                    <td>30-03-2021</td>
+                    <td>08-04-2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Uniswap (UNI)</a></th>
+                    <td>52,0000</td>
+                    <td>14-07-2021</td>
+                    <td>11-09-2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Dogecoin (DOGE)</a></th>
+                    <td>84,000</td>
+                    <td>16-04-2021</td>
+                    <td>16-06-2021</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="pl-4 font-semibold"><a href="Token-overview.html" class="text-white">Huobi Token (HT)</a></th>
+                    <td>10,0000</td>
+                    <td>10-02-2021</td>
+                    <td>20-06-2021</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+          <div class="card graph-card text-center py-5 shadow-sm">
+            <div class="px-4">
+              <ul class="list-unstyled d-flex align-items-end mb-0">
+                <li>
+                  <p class="font-14">Sabtu, 5 December 2021</p>
+                  <h3 class="font-20 mb-0 font-semibold">IDR 269,035,910</h3>
+                </li>
+                <li class="ml-auto">
+                  <p class="font-14 text-yellow mb-0">+3.14%</p>
+                </li>
+              </ul>
+          </div>
+            
+            <div class="card-body mt-5">
+                <canvas id="chLine"></canvas>
+            </div>
+
+            <div class="mt-4">
+              <p class="">Buy Crypto with <span class="font-extrabold font-20">0% fee</span></p>
+              <p>on credit/debit card for your first 30days</p>
+              <a href="#" class="btn btn-primary mt-3 mb-3">Install and buy now</a>
+            </div>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="py-3">
+      <div class="container">
+        <nav class="navbar justify-content-center">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item mr-sm-3">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Twitter.svg"></a>
+            </li>
+            <li class="list-inline-item mr-sm-3">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Github.svg"></a>
+            </li>
+            <li class="list-inline-item mr-sm-3">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Meduim.svg"></a>
+            </li>
+            <li class="list-inline-item">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Telegram.svg"></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+  </footer>
+ 
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <!-- <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>  -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/custome.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/chart1.js"></script>
+</body>
+
+</html>

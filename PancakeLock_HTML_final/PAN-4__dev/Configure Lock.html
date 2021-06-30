@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custome-select.css">
+  <title data-origin="Pancakelock">Pancakelock</title>
+</head>
+
+<body class="day-mode">
+  <nav class="navbar navbar-expand-md navbar-light pl-0 pr-0 bg-box">
+    <div class="container">
+      <a class="navbar-brand light-mode" href="#"><img src="Image/Header_Logo.svg" alt="logo"></a>
+      <a class="navbar-brand dark-mode" href="#"><img src="Image/Header_Logo1.svg" alt="logo"></a>
+      <ul class="navbar-nav right_menu ml-md-auto position-relative float-right order-sm-5">
+        <li class="nav-item ">
+          <div class="connect-btn mr-4 bg-box ">
+            <a href="#" class="btn text-gray hover-white border-yellow py-1 mr-2 radius1"><img src="./Image/English.svg" class="px-1">English</a>
+            <a href="#" class="btn text-dark p-0 mx-3"><img src="./Image/Toggle_theme.svg"></a>
+            <a href="#" class="btn text-dark p-0" data-toggle="modal"><img src="./Image/ellipsis.svg"></a>
+          </div>
+        </li>
+    </div>
+    </ul>
+  </nav>
+
+  <div class="bg-body">
+    <section class="create-lock configure-lock py-4">
+      <div class="container px-1">
+        <div class="row min-vh-100 align-items-center mx-0">
+          <div class="col-md-12 px-0">
+            <div class="row justify-content-center w-100 px-sm-5 ">
+              <div class="col-md-12 col-lg-6 col-xl-6 mt-3">
+                <div class="card radius1 w-60 shadow bg-card">
+                  <div class="card-header flex-pos position-relative text-light text-center light-mode border-bottom-0">
+                    <div class="pos-a">
+                      <a href="./enter-address.html"><img src="Image/back_white_arrow.svg"></a>
+                    </div>
+                    <div class="flex-pos">
+                      <img src="Image/create-lock.svg"><span class="font-24 font-weight-bold px-3">Configure Lock</span>
+                    </div>
+                  </div>
+                  <div class="card-body px-4 pb-4">
+                    <div class="box-1 w-100 position-relative p-0 bg-card-inner">
+                      <div class="d-flex justify-content-between p-4 mb-2 bg-box radius1">
+                        <div class="left-part">
+                          <h6 class="font-weight-bold text-yellow font-30">50,052</h6>
+                          <span class="text-gray font-13">LOCK AMOUNT</span>
+                        </div>
+                        <div class="right-part">
+                          <div>
+                            <select class="vodiapicker">
+                              <option value="en" class="test" data-thumbnail="./Image/Bitcoin_btc.svg">BTC Coin</option>
+                              <option value="au" data-thumbnail="./Image/ethereum-eth.svg">ETH Coin</option>
+                              <option value="uk" data-thumbnail="./Image/Bitcoin_btc.svg">BTC Coin</option>
+                            </select>
+                            <div class="lang-select">
+                              <div class="b">
+                                <ul id="a"></ul>
+                                <span class="caret"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-center lock-ab bg-img-lock radius5 p-8">
+                        <img src="Image/Lock_swap.svg">
+                      </div>
+                      <div class=" d-flex justify-content-between p-4 bg-box radius1">
+                        <div class="left-part">
+                          <h6 class="font-weight-bold text-light font-30">90</h6>
+                          <span class="text-gray font-13">UNLOCK DATE</span>
+                        </div>
+                        <div class="right-part float-right">
+                          <h6 class="font-weight-bold text-gray font-14">September, 22 2021</h6>
+                          <span class="text-gray font-weight-bold bg-days p-1 radius-min">
+                        <select id="days" class="border-0 text-light">
+                          <option value="volvo" class="text-dark">Days</option>
+                          <option value="saab" class="text-dark">Month</option>
+                          <option value="vw" class="text-dark">Year</option>
+                        </select>
+                      </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lower-part mt-3 border-gray p-2 mb-2 ">
+                      <div class="box-1 d-flex justify-content-between px-3 py-1 radius1 ">
+                        <div class="left-part">
+                          <span class="text-yellow font-14">Available Token</span>
+                          <h6 class="font-weight-bold text-light py-2"><img src="./Image/BNB_Logo.svg"> Binance</h6>
+                        </div>
+                        <div class="right-part d-flex align-items-center">
+                          <span class="text-light font-21 font-weight-bold">25.490.00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-gray">Fee = <span class="text-yellow">0% (No Fee)</span></span>
+                    <div class="btn-box  text-center mt-3">
+                      <a href="#" class="btn btn-primary text-black font-weight-bold px-sm-4 px-2 mb-2 btn-h15 radius1">Approve Lock    <img src="./Image/right_arrow_dark.svg"></a>
+                      <a href="#" class="btn btn-gray font-weight-bold hover-gray px-sm-4 px-2 mb-2 btn-h15 radius1 hover-bg-sh">Lock BNB   <img src="./Image/right_arrow_grey.svg"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 d-flex align-items-center px-0 mt-3">
+            <div class="row justify-content-center w-100 px-sm-5">
+              <div class="col-md-12 col-lg-6 col-xl-6">
+                <div class="card w-60 shadow radius1 bg-card">
+                  <div class="card-header flex-pos text-center border-bottom-0">
+                    <img src="Image/create-lock.svg" />
+                    <span class="font-24 font-weight-bold text-light px-3">Claim PLOCK</span>
+                  </div>
+                  <div class="card-body px-sm-4 px-1 pb-4 pt-1">
+                    <div class="w-100 position-relative">
+
+                      <div class="lower-part mt-3 border-gray p-2 my-3">
+                        <div class="box-1 d-flex justify-content-between px-3 py-1 radius1 ">
+                          <div class="left-part">
+                            <span class="text-yellow font-14">Available Token</span>
+                            <h6 class="font-weight-bold text-light py-2"><img src="./Image/BNB_Logo.svg"> PancakeLock</h6>
+                          </div>
+                          <div class="right-part d-flex align-items-center">
+                            <span class="text-light font-21 font-weight-bold">100.000</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class=" d-flex justify-content-between p-4 bg-box radius1">
+                        <div class="left-part">
+                          <h6 class="font-weight-bold text-yellow font-30">0.0</h6>
+                          <span class="text-gray font-13">AMOUNT</span>
+                        </div>
+                        <div class="right-part d-flex align-items-center">
+                          <a href="#" class="btn text-light radius-min bg-days">All Available</a>
+                        </div>
+                      </div>
+                      <div class="text-center mt-4 btn-box">
+                        <a href="#" class="btn btn-primary text-black font-weight-bold px-sm-4 px-2 btn-h15 mb-2 radius1">Claim    <img src="./Image/right_arrow_dark.svg"></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script> -->
+  <!-- <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>  -->
+  <!-- <script src="js/bootstrap.min.js"></script>
+  <script src="js/custome.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/select-img.js"></script> -->
+</body>
+</html>

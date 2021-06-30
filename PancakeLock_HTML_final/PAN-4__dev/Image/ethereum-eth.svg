@@ -1,0 +1,11 @@
+<svg id="ethereum-eth" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+  <circle id="Ellipse_93" data-name="Ellipse 93" cx="13" cy="13" r="13" fill="#627eea"/>
+  <g id="Group_4169" data-name="Group 4169" transform="translate(7.313 3.25)">
+    <path id="Path_10907" data-name="Path 10907" d="M16.5,4v7.207l6.091,2.722Z" transform="translate(-10.406 -4)" fill="rgba(255,255,255,0.6)"/>
+    <path id="Path_10908" data-name="Path 10908" d="M15.092,4,9,13.929l6.092-2.722Z" transform="translate(-9 -4)" fill="#fff"/>
+    <path id="Path_10909" data-name="Path 10909" d="M16.5,21.152v4.9l6.1-8.433Z" transform="translate(-10.406 -6.553)" fill="rgba(255,255,255,0.6)"/>
+    <path id="Path_10910" data-name="Path 10910" d="M15.092,26.049v-4.9L9,17.616Z" transform="translate(-9 -6.553)" fill="#fff"/>
+    <path id="Path_10911" data-name="Path 10911" d="M16.5,19.129l6.091-3.537L16.5,12.872Z" transform="translate(-10.406 -5.663)" fill="rgba(255,255,255,0.2)"/>
+    <path id="Path_10912" data-name="Path 10912" d="M9,15.592l6.092,3.537V12.872Z" transform="translate(-9 -5.663)" fill="rgba(255,255,255,0.6)"/>
+  </g>
+</svg>
