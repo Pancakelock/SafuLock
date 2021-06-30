@@ -1412,17 +1412,17 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
     uint256 private lockNonce = 0;
 
     uint256 private constant PERCENT_FACTOR = 1e4;
-    bytes32 private constant AUDITOR_ROLE = keccak256("AUDITOR");
+/*    bytes32 private constant AUDITOR_ROLE = keccak256("AUDITOR");*/
 
-    mapping(address => uint8) public tokenSecurityRating;
-    mapping(uint8 => string) public securityRatingDescription;
+/*    mapping(address => uint8) public tokenSecurityRating;
+    mapping(uint8 => string) public securityRatingDescription;*/
     mapping(address => EnumerableSet.UintSet) private userLocks;
     mapping(uint256 => TokenLock) public tokenLocks;
 
-    modifier onlyAuditor() {
+/*    modifier onlyAuditor() {
         require(hasRole(AUDITOR_ROLE, msg.sender), "NOT AUDITOR");
         _;
-    }
+    }*/
 
     modifier onlyLockOwner(uint256 lockId) {
         TokenLock storage lock = tokenLocks[lockId];
@@ -1676,11 +1676,11 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         require(res, "BNB TRANSFER FAILED");
     }
 
-    function setTokenSecurityRating(address token, uint8 rating, string memory comment) external onlyAuditor {
+/*    function setTokenSecurityRating(address token, uint8 rating, string memory comment) external onlyAuditor {
         require(bytes(securityRatingDescription[rating]).length > 0, "INVALID SECURITY RATING");
         tokenSecurityRating[token] = rating;
         emit OnTokenSecurityRatingChanged(token, rating, comment);
-    }
+    }*/
 
     /**
     * @notice sets new contract to calculate fees
@@ -1705,10 +1705,10 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         emit OnMinimalLockTimeChange(newMinimalLockTime);
     }
 
-    function setSecurityRatingDescription(uint8 rating, string memory description) external onlyOwner {
+/*    function setSecurityRatingDescription(uint8 rating, string memory description) external onlyOwner {
         securityRatingDescription[rating] = description;
     }
-
+*/
     /**
     * @notice get user's locks number
     * @param user user's address
