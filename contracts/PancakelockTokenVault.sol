@@ -1,7 +1,3 @@
-/**
- *Submitted for verification at BscScan.com on 2021-05-04
-*/
-
 // Sources flattened with hardhat v2.0.10 https://hardhat.org
 
 // File @openzeppelin/contracts/token/ERC20/IERC20.sol@v3.4.0
