@@ -19,7 +19,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         bool withdrawn;
     }
 
-    bytes32 ownerRole = keccak256("OWNER");
+    bytes32 constant private ownerRole = keccak256("OWNER");
 
     modifier onlyOwner() {
         _checkRole(ownerRole, _msgSender());
@@ -33,7 +33,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
     uint256 public totalBnbFees = 0;
     // withdrawable values
     uint256 public remainingBnbFees = 0;
-    address[] tokenAddressesWithFees;
+    address[] public tokenAddressesWithFees;
     mapping(address => uint256) public tokensFees;
 
     uint256 public depositId;
@@ -62,7 +62,9 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         uint256 amount
     );
 
-    constructor() {}
+    constructor() {
+        grantRole(ownerRole, _msgSender());
+    }
 
     function lockTokens(
         address _tokenAddress,
