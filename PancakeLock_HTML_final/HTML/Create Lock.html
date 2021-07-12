@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <title data-origin="Pancakelock">Pancakelock</title>
+</head>
+
+<body class="day-mode">
+  
+    
+    <nav class="navbar navbar-expand-md navbar-light pl-0 pr-0 border-bottom">
+      <div class="container">
+      <a class="navbar-brand mr-0" href="#"><img src="Image/Header_Logo.svg" alt="logo"></a>
+      <!-- <a class="navbar-brand dark-mode mr-0" href="#"><img src="Image/Header_Logo1.svg" alt="logo"></a> -->
+      <ul class="navbar-nav right_menu ml-md-auto position-relative float-right order-sm-5 ">
+        <li class="nav-item">
+          <div class="connect-btn mr-4">
+           <span class="px-sm-3 text-yellow">6.25 ETH</span>
+          <a href="#" class="btn btn-primary btn-sm px-sm-4 px-1 py-2" data-toggle="modal" data-target="#exampleModal">Connect Wallet</a>
+        </div>
+        </li>
+        <!-- user area -->
+       
+        <!-- <li class="nav-item mr-sm-4 mr-1 d-flex border-yellow">
+          <span class="mt-1"><img src="./Image/Language.svg"></span>
+          <select class="selectpicker form-control" data-live-search="true" data-default="India"
+          data-flag="true">
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="Australia">Australia</option>
+        <option value="South Africa">South Africa</option>
+      </select>
+        </li>
+        
+        <li class="nav-item mr-sm-2 mr-1 mr-sm-4">
+          <div class="switcher">
+            <button class="day btn btn-switch"><img class="v-btn" src="Image/Light-Mode.svg"></button>
+            <button class="night btn btn-switch"><img src="Image/Dark_Mode.svg"></button>
+        </div>
+        </li>
+        <li class="nav-item dropdown dropdown-md dropdown-hover show menu-li mr-sm-2 mr-1 mr-sm-4">
+          <a class="nav-icon dropdown-toggle" id="navbarDropdown-7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <img src="Image/Menu.svg" alt="setting icon">
+          </a>
+          <div class="dropdown-menu position-absolute" aria-labelledby="navbarDropdown-7">
+            <div class="row gutter-2">
+              <div class="col-12">
+                
+                <ul class="nav flex-column text-drop">
+                  <li class="nav-item py-2">
+                    <a class="text-primary active" href="#"><img class="mr-2" src="Image/About.svg">About</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Docs.svg"> Docs</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Audit.svg">Audit</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Lock.svg"> Safu Tokens</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="text-primary" href="#"><img class="mr-2" src="Image/Dex.svg"> Plock DEX</a>
+                  </li>
+                  <li class="nav-item text-primary py-2">
+                    <a class="btn btn-primary d-block text-white" href="#">Safu Lock</a>
+                  </li>
+                </ul>
+              </div>
+              
+            </div>
+          </div>
+        </li>  -->
+
+
+     
+      </ul>
+    </div>
+    </nav>
+    <div class="bg-body">
+    <section class="create-lock">
+      <div class="container px-1">
+        <div class="row min-vh-100 mx-0 ">
+          <div class="col-md-12 d-flex align-items-center px-0">
+            <div class="row justify-content-center w-100 px-sm-5">
+              <div class="col-md-12 col-lg-6 col-xl-6">
+                <div class="card rounded-lg w-60 shadow">
+                  <div class="card-header text-center border-bottom-0">
+                   <img src="Image/create-lock.svg"> <span class="font-16 font-weight-bold">Create New Lock</span>
+                  </div>
+                  <div class="card-body px-sm-5 px-2 pb-4 pt-1">
+                <div class="w-100 position-relative">
+                  
+                  <p class="font-12 text-gray text-center">Select the type of token you would like to create a lock for.
+                    You can create multiple locks with different settings for each one.</p>
+                  
+                    <div class="radio-select">
+                        <div class="">
+                          <input type="radio" id="test1" name="radio-group" checked>
+                          <label for="test1"> 
+                            <div class="d-flex custome-box-radio">
+                            
+                            <p class="mb-0 text-lightgray mt-1">Liquidity Tokens <br/><span class="font-10 text-gray">UNI-V2 LP Tokens generated from Uniswap Pool</span></p>
+                            <img src="Image/lock_yellow.svg" class="ml-auto">
+                          </div>
+                        </label>
+                        </div>
+                        <div class="mt-3">
+                          <input type="radio" id="test2" name="radio-group">
+                          <label for="test2">
+                            <div class="d-flex custome-box-radio">
+                             
+                              <p class="mb-0 text-lightgray mt-1">Project Tokens <br/><span class="font-10 text-gray">Regular ERC-20 Project Tokens</span></p>
+                              <img src="Image/Doc_yellow.svg" class="ml-auto">
+                            </div>
+                          </label>
+                        </div>
+                   </div>
+                    <div class="text-center mt-4">
+                      <a href="./enter-address.html" class="btn btn-primary px-4 py-2 btn-w">Continue   <img src="./Image/right_arrow_white.svg"></a>
+                    </div>
+                </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+ 
+ 
+  <footer class="py-3">
+      <div class="container">
+        <nav class="navbar justify-content-center">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item mr-sm-3">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Twitter.svg"></a>
+            </li>
+            <li class="list-inline-item mr-sm-3">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Github.svg"></a>
+            </li>
+            <li class="list-inline-item mr-sm-3">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Meduim.svg"></a>
+            </li>
+            <li class="list-inline-item">
+              <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Telegram.svg"></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+  </footer>
+ 
+  </div>
+
+  <!-- model pop up-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-yellow font-weight-bold" id="exampleModalLabel">Connect to a wallet</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <form class="raido-select">
+          <section class="payment-type cf">
+          
+            <input type="radio" name="radio3" id="metamask" value="metamask"><label class="col" for="metamask">MetaMask</label>
+            <input type="radio" name="radio3" id="walletconnect" value="walletconnect" disabled><label class="col" for="walletconnect">WalletConnect(coming soon)</label>
+            <input type="radio" name="radio3" id="coinbase" value="coinbase" ><label class="col" for="coinbase">Coinbase Wallet</label>
+            <input type="radio" name="radio3" id="fortmatic" value="fortmatic" ><label class="col" for="fortmatic">Fortmatic</label>
+            <input type="radio" name="radio3" id="portis" value="portis" checked=""><label class="col" for="portis">Portis</label>
+          </section>
+
+        </form>
+
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <!-- <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>  -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/custome.js"></script>
+  <script src="js/chart.js"></script>
+</body>
+
+</html>
