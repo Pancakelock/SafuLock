@@ -63,7 +63,8 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
     );
 
     constructor() {
-        grantRole(ownerRole, _msgSender());
+        _setupRole(ownerRole, _msgSender());
+        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }
 
     function lockTokens(

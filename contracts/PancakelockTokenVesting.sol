@@ -1,6 +1,4 @@
-// Sources flattened with hardhat v2.0.10 https://hardhat.org
-
-// File 
+// SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
 
@@ -20,7 +18,6 @@ interface IPancakelockTokenVault {
 
     function destruct(address) external;
 }
-
 
 interface IFeesCalculator {
     function calculateFees(
@@ -54,9 +51,6 @@ interface IFeesCalculator {
         );
 }
 
-// File contracts/PancakelockTokenVesting.sol
-
-// SPDX-License-Identifier: UNLICENSED
 
 //ERC20 token locker and vesting
 
@@ -88,7 +82,6 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         uint256 indexed lockId,
         address indexed newOwner
     );
-    /*event OnTokenSecurityRatingChanged(address indexed token, uint8 indexed rating, string desc);*/
     event OnInstanceDestruction(address indexed instance, address receiver);
     event OnMinimalLockTimeChange(uint256 minimalLockTime);
 
@@ -97,29 +90,20 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         address token;
         address owner;
         uint256 unlockTime;
-        uint256 lockedPlt;
     }
 
     address public masterContract;
     address payable public feeReceiver;
-    IFeesCalculator public feesCalculator;
-    IERC20 public feeToken;
     uint256 public minimalLockTime;
+
+    uint256 public bnbFee = 1 ether;
+    uint256 public tokenFeePercent = 5; // 100% = 1000
 
     uint256 private lockNonce = 0;
 
     uint256 private constant PERCENT_FACTOR = 1e4;
-    /*    bytes32 private constant AUDITOR_ROLE = keccak256("AUDITOR");*/
-
-    /*    mapping(address => uint8) public tokenSecurityRating;
-    mapping(uint8 => string) public securityRatingDescription;*/
     mapping(address => EnumerableSet.UintSet) private userLocks;
     mapping(uint256 => TokenLock) public tokenLocks;
-
-    /*    modifier onlyAuditor() {
-        require(hasRole(AUDITOR_ROLE, msg.sender), "NOT AUDITOR");
-        _;
-    }*/
 
     modifier onlyLockOwner(uint256 lockId) {
         TokenLock storage lock = tokenLocks[lockId];
@@ -130,27 +114,16 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         _;
     }
 
-    constructor(
-        address _master,
-        address _feesCalculator,
-        address payable _feesReceiver,
-        address _feeToken
-    ) {
+    constructor(address _master, address payable _feesReceiver) {
         require(
-            _master != address(0) &&
-                _feeToken != address(0) &&
-                _feesCalculator != address(0) &&
-                _feesReceiver != address(0),
+            _master != address(0) && _feesReceiver != address(0),
             "ZERO ADDRESS"
         );
 
         masterContract = _master;
-        feesCalculator = IFeesCalculator(_feesCalculator);
         feeReceiver = _feesReceiver;
-        feeToken = IERC20(_feeToken);
 
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        /*_setupRole(AUDITOR_ROLE, msg.sender);*/
     }
 
     /**
@@ -159,18 +132,15 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
      * @param amount amount of tokens to lock
      * @param unlockTime unix time in seconds after that tokens can be withdrawn
      * @param withdrawer account that can withdraw tokens to it's balance
-     * @param feePaymentMode 0 - pay fees in ETH + % of token,
-     *                       1 - pay fees in PLT + % of token,
-     *                       2 - pay fees fully in BNB,
-     *                       3 - pay fees fully in PLT
-     *                       4 - pay fees by locking PLT
+     * @param isFeeInBNB true - pay fees fully in BNB,
+     *                   false - pay fees fully in % of token
      */
     function lockTokens(
         address token,
         uint256 amount,
         uint256 unlockTime,
         address payable withdrawer,
-        uint8 feePaymentMode
+        bool isFeeInBNB
     ) external payable nonReentrant returns (uint256 lockId) {
         require(amount > 0, "ZERO AMOUNT");
         require(token != address(0), "ZERO TOKEN");
@@ -183,19 +153,16 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
             unlockTime < 10000000000,
             "INVALID UNLOCK TIME, MUST BE UNIX TIME IN SECONDS"
         );
-
-        (uint256 amountToLock, uint256 pltToLock) = _payFees(
+        uint256 amountToLock = _payFees(
             token,
             amount,
-            unlockTime,
-            feePaymentMode
+            isFeeInBNB
         );
         lockId = _createLock(
             token,
             withdrawer,
             amountToLock,
-            unlockTime,
-            pltToLock
+            unlockTime
         );
     }
 
@@ -206,11 +173,8 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
      * @param percents[] array of amount percentage (1e4 = 100%). Sum must be 100%
      * @param unlockTimes[] sorted array of unix times in seconds, must be same length as percents[]
      * @param withdrawer account that can withdraw tokens to it's balance
-     * @param feePaymentMode 0 - pay fees in ETH + % of token,
-     *                       1 - pay fees in PLT + % of token,
-     *                       2 - pay fees fully in BNB,
-     *                       3 - pay fees fully in PLT
-     *                       4 - pay fees by locking PLT
+     * @param isFeeInBNB true - pay fees fully in BNB,
+     *                   false - pay fees fully in % of token
      */
     function vestTokens(
         address token,
@@ -218,7 +182,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         uint256[] memory percents,
         uint256[] memory unlockTimes,
         address payable withdrawer,
-        uint8 feePaymentMode
+        bool isFeeInBNB
     ) external payable nonReentrant {
         require(percents.length == unlockTimes.length, "ARRAY SIZES MISMATCH");
         require(percents.length >= 2, "LOW LOCKS COUNT");
@@ -229,28 +193,22 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
             "TOO SMALL UNLOCK TIME"
         );
 
-        (uint256 amountToLock, uint256 pltToLock) = _payFees(
+        uint256 amountToLock = _payFees(
             token,
             amount,
-            unlockTimes[unlockTimes.length - 1],
-            feePaymentMode
+            isFeeInBNB
         );
 
         uint256 percentsOverall = percents[0];
 
         //first lock
-        (
-            uint256 remainingAmount,
-            uint256 remainingPltToLock
-        ) = createVestingItem(
+        uint256 remainingAmount = createVestingItem(
             token,
             withdrawer,
             amountToLock,
-            pltToLock,
             percents[0],
             unlockTimes[0],
-            amountToLock,
-            pltToLock
+            amountToLock
         );
 
         for (uint32 i = 1; i < unlockTimes.length - 1; i++) {
@@ -259,15 +217,13 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
                 "UNSORTED UNLOCK TIMES"
             );
 
-            (remainingAmount, remainingPltToLock) = createVestingItem(
+            remainingAmount = createVestingItem(
                 token,
                 withdrawer,
                 amountToLock,
-                pltToLock,
                 percents[i],
                 unlockTimes[i],
-                remainingAmount,
-                remainingPltToLock
+                remainingAmount
             );
 
             percentsOverall = percentsOverall.add(percents[i]);
@@ -276,8 +232,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
             token,
             withdrawer,
             remainingAmount,
-            unlockTimes[unlockTimes.length - 1],
-            remainingPltToLock
+            unlockTimes[unlockTimes.length - 1]
         );
         require(
             percentsOverall.add(percents[percents.length - 1]) ==
@@ -296,27 +251,16 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         address token,
         address withdrawer,
         uint256 amountToLock,
-        uint256 pltToLock,
         uint256 percent,
         uint256 unlockTime,
-        uint256 remainingAmount,
-        uint256 remainingPltAmount
-    ) private returns (uint256, uint256) {
+        uint256 remainingAmount
+    ) private returns (uint256) {
         uint256 currentLockAmount = amountToLock.mul(percent).div(
             PERCENT_FACTOR
         );
-        uint256 currentPltToLock = pltToLock.mul(percent).div(PERCENT_FACTOR);
-        _createLock(
-            token,
-            withdrawer,
-            currentLockAmount,
-            unlockTime,
-            currentPltToLock
-        );
-        return (
-            remainingAmount.sub(currentLockAmount),
-            remainingPltAmount.sub(currentPltToLock)
-        );
+
+        _createLock(token, withdrawer, currentLockAmount, unlockTime);
+        return remainingAmount.sub(currentLockAmount);
     }
 
     function createInstance(address token) private returns (address) {
@@ -331,8 +275,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         address token,
         address owner,
         uint256 amount,
-        uint256 unlockTime,
-        uint256 lockedPlt
+        uint256 unlockTime
     ) private returns (uint256) {
         address instance = createInstance(token);
         uint256 lockId = lockNonce++;
@@ -340,8 +283,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
             owner: owner,
             instance: instance,
             token: token,
-            unlockTime: unlockTime,
-            lockedPlt: lockedPlt
+            unlockTime: unlockTime
         });
         tokenLocks[lockId] = lock;
         userLocks[owner].add(lockId);
@@ -354,57 +296,40 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
     function _payFees(
         address token,
         uint256 amount,
-        uint256 unlockTime,
-        uint8 feePaymentMode
-    ) private returns (uint256, uint256) {
-        (
-            uint256 ethFee,
-            uint256 systemTokenFee,
-            uint256 tokenFee,
-            uint256 pltLockAmount
-        ) = feesCalculator.calculateFees(
-            token,
-            amount,
-            unlockTime,
-            feePaymentMode
-        );
-        require(tokenFee <= amount.div(100), "TOKEN FEE EXCEEDS 1%");
-        //safeguard for token fee
-        transferFees(token, ethFee, systemTokenFee, tokenFee, pltLockAmount);
-        if (msg.value > ethFee) {
-            // transfer excess back
-            transferBnb(msg.sender, msg.value.sub(ethFee));
-        }
-        return (amount.sub(tokenFee), pltLockAmount);
+        bool isFeeInBNB
+    ) private returns (uint256) {
+        uint256 tokenFee = amount.mul(tokenFeePercent).div(1000);
+        transferFees(token, tokenFee, isFeeInBNB);
+        return amount.sub(tokenFee);
     }
 
     function transferFees(
         address token,
-        uint256 ethFee,
-        uint256 systemTokenFee,
         uint256 tokenFee,
-        uint256 pltLockAmount
+        bool isFeeInBNB
     ) private {
-        if (ethFee > 0) {
-            require(msg.value >= ethFee, "ETH FEES NOT MET");
-            transferBnb(feeReceiver, ethFee);
-        }
-        if (systemTokenFee > 0) {
-            require(
-                feeToken.allowance(msg.sender, address(this)) >= systemTokenFee,
-                "SYSTEM TOKEN FEE NOT MET"
-            );
-            feeToken.safeTransferFrom(msg.sender, feeReceiver, systemTokenFee);
-        }
-        if (tokenFee > 0) {
-            require(
-                IERC20(token).allowance(msg.sender, address(this)) >= tokenFee,
-                "TOKEN FEE NOT MET"
-            );
-            IERC20(token).safeTransferFrom(msg.sender, feeReceiver, tokenFee);
-        }
-        if (pltLockAmount > 0) {
-            feeToken.safeTransferFrom(msg.sender, address(this), pltLockAmount);
+        if (isFeeInBNB) {
+            if (bnbFee > 0) {
+                require(msg.value >= bnbFee, "BNB FEES NOT MET");
+                transferBnb(feeReceiver, bnbFee);
+            }
+            if (msg.value > bnbFee) {
+                // transfer excess back
+                transferBnb(msg.sender, msg.value.sub(bnbFee));
+            }
+        } else {
+            if (tokenFee > 0) {
+                require(
+                    IERC20(token).allowance(msg.sender, address(this)) >=
+                        tokenFee,
+                    "TOKEN FEE NOT MET"
+                );
+                IERC20(token).safeTransferFrom(
+                    msg.sender,
+                    feeReceiver,
+                    tokenFee
+                );
+            }
         }
     }
 
@@ -428,40 +353,20 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
     /**
      * @notice add tokens to an existing lock
      * @param amountToIncrement tokens amount to add
-     * @param feePaymentMode fee payment mode
+     * @param isFeeInBNB true - pay fees fully in BNB,
+     *                   false - pay fees fully in % of token
      */
     function increaseLockAmount(
         uint256 lockId,
         uint256 amountToIncrement,
-        uint8 feePaymentMode
+        bool isFeeInBNB
     ) external payable nonReentrant onlyLockOwner(lockId) {
         require(amountToIncrement > 0, "ZERO AMOUNT");
         TokenLock storage lock = tokenLocks[lockId];
-
-        (
-            uint256 ethFee,
-            uint256 systemTokenFee,
-            uint256 tokenFee,
-            uint256 pltLockAmount
-        ) = feesCalculator.calculateIncreaseAmountFees(
-            lock.token,
-            amountToIncrement,
-            lock.unlockTime,
-            feePaymentMode
-        );
-        require(tokenFee <= amountToIncrement.div(100), "TOKEN FEE EXCEEDS 1%");
+        uint256 tokenFee = amountToIncrement.mul(tokenFeePercent).div(1000);
+        //require(tokenFee <= amountToIncrement.div(100), "TOKEN FEE EXCEEDS 1%");
         //safeguard for token fee
-        transferFees(
-            lock.token,
-            ethFee,
-            systemTokenFee,
-            tokenFee,
-            pltLockAmount
-        );
-        if (msg.value > ethFee) {
-            // transfer excess back
-            transferBnb(msg.sender, msg.value.sub(ethFee));
-        }
+        transferFees(lock.token, tokenFee, isFeeInBNB);
 
         uint256 actualIncrementAmount = amountToIncrement.sub(tokenFee);
         IERC20(lock.token).safeTransferFrom(
@@ -499,9 +404,9 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
 
         uint256 currentBalance = IERC20(lock.token).balanceOf(lock.instance);
         if (currentBalance == 0) {
-            if (lock.lockedPlt > 0) {
-                feeToken.safeTransfer(lock.owner, lock.lockedPlt);
-            }
+            // if (lock.lockedPlt > 0) {
+            //     feeToken.safeTransfer(lock.owner, lock.lockedPlt);
+            // }
             //clean up storage to save gas
             destroyInstance(lock.instance, lock.owner);
             userLocks[lock.owner].remove(lockId);
@@ -530,31 +435,11 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         emit OnLockOwnershipTransferred(lockId, newOwner);
     }
 
-    /*
-    function getTokenSecurityRating(address token) external view returns (string memory) {
-        return securityRatingDescription[tokenSecurityRating[token]];
-    }*/
-
     function transferBnb(address recipient, uint256 amount) private {
         (bool res, ) = recipient.call{value: amount}("");
         require(res, "BNB TRANSFER FAILED");
     }
-
-    /*    function setTokenSecurityRating(address token, uint8 rating, string memory comment) external onlyAuditor {
-        require(bytes(securityRatingDescription[rating]).length > 0, "INVALID SECURITY RATING");
-        tokenSecurityRating[token] = rating;
-        emit OnTokenSecurityRatingChanged(token, rating, comment);
-    }*/
-
-    /**
-     * @notice sets new contract to calculate fees
-     * @param newFeesCalculator address of new fees calculator contract
-     */
-    function setFeesCalculator(address newFeesCalculator) external onlyOwner {
-        require(newFeesCalculator != address(0), "ZERO ADDRESS");
-        feesCalculator = IFeesCalculator(newFeesCalculator);
-    }
-
+    
     /**
      * @notice sets new beneficiary
      * @param newFeeReceiver address of new fees receiver
@@ -568,11 +453,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         minimalLockTime = newMinimalLockTime;
         emit OnMinimalLockTimeChange(newMinimalLockTime);
     }
-
-    /*    function setSecurityRatingDescription(uint8 rating, string memory description) external onlyOwner {
-        securityRatingDescription[rating] = description;
-    }
-*/
+    
     /**
      * @notice get user's locks number
      * @param user user's address

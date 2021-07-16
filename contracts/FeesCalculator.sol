@@ -47,7 +47,7 @@ pragma solidity ^0.8.0;
 contract FeesCalculator is Ownable, IFeesCalculator {
     using SafeMath for uint256;
 
-    uint256 public ethMin = 1.57 ether;
+    uint256 public ethMin = 1 ether;
     uint256 public tokenMin = 28 ether;
     uint256 public ethMax = 23 ether; // ~$5000 for 2021/02/28
     uint256 public tokenMax = 103.5 ether; // 0.75*ethMax for 2021/02/28
@@ -79,9 +79,9 @@ contract FeesCalculator is Ownable, IFeesCalculator {
      *                       4 - pay fees by locking PLT
      */
     function calculateFees(
-        address, /* lpToken */
+        address lpToken,
         uint256 amount,
-        uint256, /* unlockTime */
+        uint256 unlockTime,
         uint8 paymentMode
     )
         external
@@ -120,9 +120,9 @@ contract FeesCalculator is Ownable, IFeesCalculator {
      *                       4 - pay fees by locking PLT
      */
     function calculateIncreaseAmountFees(
-        address, /* lpToken */
+        address lpToken,
         uint256 amount,
-        uint256, /* unlockTime */
+        uint256 unlockTime,
         uint8 paymentMode
     )
         external
