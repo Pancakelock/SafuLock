@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/custome-select.css" />
+    <title data-origin="Pancakelock">Pancakelock</title>
+  </head>
+
+  <body class="day-mode theme-opt">
+    <nav class="navbar navbar-expand-md navbar-light pl-0 pr-0 border-bottom">
+      <div class="container-nav">
+        <a class="navbar-brand light-mode" href="#"
+          ><img src="Image/Header_Logo.svg" alt="logo"
+        /></a>
+        <a class="navbar-brand dark-mode" href="#"
+          ><img src="Image/Header_Logo1.svg" alt="logo"
+        /></a>
+        <ul class="navbar-nav right_menu ml-md-auto position-relative float-right order-sm-5">
+          <!-- user area -->
+          <!-- 
+          <li class="nav-item mr-sm-4 mr-1 d-flex border-yellow">
+            <span class="mt-1"><img src="./Image/Language.svg" /></span>
+            <select
+              class="selectpicker form-control"
+              data-live-search="true"
+              data-default="India"
+              data-flag="true"
+            >
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="Australia">Australia</option>
+              <option value="South Africa">South Africa</option>
+            </select>
+          </li> -->
+
+          <!-- <li class="nav-item mr-sm-2 mr-1 mr-sm-4">
+            <div class="switcher">
+              <button class="day btn btn-switch">
+                <img class="v-btn" src="Image/Light-Mode.svg" />
+              </button>
+              <button class="night btn btn-switch"><img src="Image/Dark_Mode.svg" /></button>
+            </div>
+          </li> -->
+          <li
+            class="nav-item dropdown dropdown-md dropdown-hover show menu-li mr-sm-2 mr-1 mr-sm-4"
+          >
+            <a
+              class="nav-icon dropdown-toggle py-2"
+              id="navbarDropdown-7"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+            >
+              <img src="Image/Menu.svg" alt="setting icon" />
+            </a>
+            <div class="dropdown-menu position-absolute" aria-labelledby="navbarDropdown-7">
+              <div class="row gutter-2">
+                <div class="col-12">
+                  <ul class="nav flex-column text-drop">
+                    <li class="nav-item py-2">
+                      <a class="text-primary active" href="#"
+                        ><img class="mr-2" src="Image/About.svg" />About</a
+                      >
+                    </li>
+                    <li class="nav-item text-primary py-2">
+                      <a class="text-primary" href="#"
+                        ><img class="mr-2" src="Image/Docs.svg" /> Docs</a
+                      >
+                    </li>
+                    <li class="nav-item text-primary py-2">
+                      <a class="text-primary" href="#"
+                        ><img class="mr-2" src="Image/Audit.svg" />Audit</a
+                      >
+                    </li>
+                    <li class="nav-item text-primary py-2">
+                      <a class="text-primary" href="#"
+                        ><img class="mr-2" src="Image/Lock.svg" /> Safu Tokens</a
+                      >
+                    </li>
+                    <li class="nav-item text-primary py-2">
+                      <a class="text-primary" href="#"
+                        ><img class="mr-2" src="Image/Dex.svg" /> Plock DEX</a
+                      >
+                    </li>
+                    <li class="nav-item text-primary py-2">
+                      <a
+                        class="btn btn-primary d-block text-white"
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#createLock"
+                        >Safu Lock</a
+                      >
+                    </li>
+                    <li class="nav-item text-primary py-2">
+                      <a class="btn btn-primary d-block text-white" href="#">Vesting</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a
+              href="#"
+              class="btn btn-primary btn-sm text-dark font-weight-bold px-sm-4 px-1 py-1 radius1"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              >Connect Wallet <img src="Image/arrow-black.svg"
+            /></a>
+            <!-- <div class="connect-btn mr-4">
+              <span class="px-sm-3 text-yellow">6.25 ETH</span>
+
+            </div> -->
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="bg-body">
+      <section class="create-lock configure-lock">
+        <div class="container px-1">
+          <div class="row min-vh-100 align-items-center mx-0">
+            <div class="col-md-12 px-0">
+              <div class="row justify-content-center w-100 px-sm-5">
+                <div class="col-md-12 col-lg-6 col-xl-6">
+                  <div class="card rounded-lg w-60 shadow bg-black radius1">
+                    <div class="card-header d-if text-center radius1">
+                      <!-- <div class="d-inline-block float-left">
+                        <a href="./enter-address.html"><img src="Image/Back_Arrow.svg" /></a>
+                      </div> -->
+                      <img src="Image/create-lock.svg" />
+                      <span class="font-24 font-weight-bold ml-3 text-light">Configure Lock</span>
+                    </div>
+                    <div class="card-body px-4 pb-4">
+                      <h6 class="text-gray font-13 mb-3">LOCK TOKENS AMOUNT</h6>
+                      <div class="box-1 w-100 position-relative p-0 bg-gray">
+                        <div class="d-flex justify-content-between px-4 pt-4 py-2 mb-2">
+                          <div class="left-part">
+                            <select class="vodiapicker">
+                              <option value="en" class="test" data-thumbnail="./Image/BNB.svg">
+                                BNB
+                              </option>
+                              <option
+                                value="en"
+                                class="test"
+                                data-thumbnail="./Image/Bitcoin_btc.svg"
+                              >
+                                BTC Coin
+                              </option>
+                              <option value="au" data-thumbnail="./Image/ethereum-eth.svg">
+                                ETH Coin
+                              </option>
+                              <option value="uk" data-thumbnail="./Image/Bitcoin_btc.svg">
+                                BTC Coin
+                              </option>
+                            </select>
+                            <div class="lang-select bg-gray-second p-sl radius1 w-content">
+                              <button class="btn-select" value=""></button>
+                              <div class="b">
+                                <ul id="a"></ul>
+                                <span class="caret"></span>
+                              </div>
+                            </div>
+                            <h6 class="font-weight-bold text-gray pt-4 m-0 font-13">
+                              YOUR BALANCE: 0,45435 BTC <span class="text-yellow">MAX</span>
+                            </h6>
+                          </div>
+
+                          <div class="right-part d-if">
+                            <h6 class="font-weight-bold text-yellow m-0 font-30">214</h6>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-1 w-100 position-relative p-0 mt-4 bg-gray calendar-options">
+                        <div class="p-4">
+                          <div id="sandbox-container">
+                            <div class="input-group date">
+                              <input type="text" class="form-control px-1 input-calendar" /><span
+                                class="input-group-addon"
+                                ><img src="./Image/Calendar.svg" class="right-icon" />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <h6 class="font-weight-bold text-yellow font-18 mt-4">Fees options</h6>
+                      <div class="custom-control custom-radio">
+                        <input
+                          type="radio"
+                          id="customRadio1"
+                          name="customRadio"
+                          class="custom-control-input"
+                          checked
+                        />
+                        <label class="custom-control-label" for="customRadio1">
+                          <h7 class="font-weight-bold text-light font-16 text-center">
+                            Pay fee <span class="text-yellow">0.5%</span> of the amount
+                          </h7>
+                        </label>
+                      </div>
+                      <div class="custom-control custom-radio mt-3">
+                        <input
+                          type="radio"
+                          id="customRadio2"
+                          name="customRadio"
+                          class="custom-control-input"
+                        />
+                        <label class="custom-control-label" for="customRadio2">
+                          <h7 class="font-weight-bold text-light font-16 text-center">
+                            Pay fee in 1 <span class="text-yellow">BNB</span>
+                          </h7>
+                        </label>
+                      </div>
+
+                      <div class="d-cf w-max mt-4">
+                        <a
+                          href="#"
+                          class="
+                            btn btn-primary
+                            text-dark
+                            font-weight-bold
+                            w-max
+                            px-sm-4 px-2
+                            py-3
+                            mb-2
+                            radius1
+                          "
+                          >Approve <img src="./Image/arrow-black.svg"
+                        /></a>
+                        <a
+                          href="#"
+                          class="btn btn-gray font-weight-bold w-max px-sm-4 px-2 py-3 mb-2 radius1"
+                          >Lock BNB <img src="./Image/right_arrow_grey.svg"
+                        /></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <footer class="py-3">
+        <div class="container">
+          <nav class="navbar justify-content-center">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item mr-sm-3">
+                <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Twitter.svg" /></a>
+              </li>
+              <li class="list-inline-item mr-sm-3">
+                <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Github.svg" /></a>
+              </li>
+              <li class="list-inline-item mr-sm-3">
+                <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Meduim.svg" /></a>
+              </li>
+              <li class="list-inline-item">
+                <a class="nav-link px-0" href="#"><img class="mr-2" src="Image/Telegram.svg" /></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </footer> -->
+    </div>
+
+    <!-- CONNECT WALLET model pop up-->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-yellow font-weight-bold" id="exampleModalLabel">
+              Connect to a wallet
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="raido-select">
+              <section class="payment-type cf">
+                <input type="radio" name="radio3" id="metamask" value="metamask" checked="" /><label
+                  class="col"
+                  for="metamask"
+                  >MetaMask<img src="Image/meta-mask.png" class="float-right mr-3"
+                /></label>
+                <input type="radio" name="radio3" id="walletconnect" value="walletconnect" /><label
+                  class="col"
+                  for="walletconnect"
+                  >Binance Chain Wallet<img src="Image/chain-wallet.png" class="float-right mr-3"
+                /></label>
+              </section>
+            </form>
+          </div>
+          <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- END OF CONNECT WALLET model pop up-->
+
+    <!-- CREATE NEW LOCK model pop up-->
+    <div
+      class="modal fade bg-black"
+      id="createLock"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-black border-gray radius1">
+          <div class="modal-header bg-black radius1">
+            <h5
+              class="modal-title text-yellow text-center font-weight-bold font-30 w-max"
+              id="exampleModalLabel"
+            >
+              Create New Lock
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">
+                <img src="Image/modal-close.svg" />
+              </span>
+            </button>
+          </div>
+          <div class="modal-body pt-1">
+            <h6 class="text-light font-weight-bold font-16 text-center lh-1 pb-2 px-4">
+              Select the type token you would like to create a lock for. You can create multiple
+              locks with different setting for each one
+            </h6>
+            <form class="raido-select">
+              <section class="payment-type cf px-4 pt-3">
+                <input
+                  type="radio"
+                  name="radio3"
+                  id="liquidTokens"
+                  value="liquidTokens"
+                  checked=""
+                /><label class="col col bg-gray" for="liquidTokens">
+                  <div class="card-body d-flex justify-content-between align-items-center py-1">
+                    <div class="card-left">
+                      <h6 class="modal-title text-yellow text-left font-weight-bold font-18">
+                        Liguidity Tokens
+                      </h6>
+                      <span class="text-gray font-14"
+                        >CAKE-V2 LP Tokens generated from <br />
+                        Pancakeswap Pool</span
+                      >
+                    </div>
+                    <div class="card-right">
+                      <img src="Image/modal-lock.svg" />
+                    </div>
+                  </div>
+                </label>
+                <input
+                  type="radio"
+                  name="radio3"
+                  id="projectsTokens"
+                  value="projectsTokens"
+                  checked=""
+                /><label
+                  class="col d-flex justify-content-between align-items-center bg-gray"
+                  for="projectsTokens"
+                >
+                  <div class="card-body d-flex justify-content-between align-items-center py-1">
+                    <div class="card-left">
+                      <h6 class="modal-title text-yellow text-left font-weight-bold font-18">
+                        Project Tokens
+                      </h6>
+                      <span class="text-gray font-14">Regular BEP-20 Project Tokens</span>
+                    </div>
+                    <div class="card-right">
+                      <img src="Image/modal-lock.svg" />
+                    </div>
+                  </div>
+                </label>
+              </section>
+            </form>
+            <div class="d-cf w-max mt-4">
+              <a
+                href="#"
+                data-toggle="modal"
+                data-target="#enterAddress"
+                data-dismiss="modal"
+                class="btn btn-primary text-dark font-weight-bold px-sm-4 px-2 py-3 mb-2 radius1"
+                ><span aria-hidden="true"> Continue <img src="./Image/arrow-black.svg" /> </span
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END OF CREATE NEW LOCK model pop up-->
+
+    <!-- ENTER ADRESS model pop up-->
+    <div
+      class="modal fade bg-black"
+      id="enterAddress"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-black border-yellow radius1">
+          <div class="modal-header bg-black radius1">
+            <h5
+              class="modal-title text-yellow text-center font-weight-bold font-30 w-max"
+              id="exampleModalLabel"
+            >
+              Enter Address
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">
+                <img src="Image/modal-close.svg" />
+              </span>
+            </button>
+          </div>
+          <div class="modal-body pt-1">
+            <h6 class="text-light font-weight-bold font-16 text-center lh-1 pb-2 px-4">
+              Enter the PancakeLockSwap pair address you’d like to lock liquidity for
+            </h6>
+            <form>
+              <div class="mb-3 px-4">
+                <label for="exampleInputAddress" class="form-label"></label>
+                <input
+                  type="address"
+                  class="form-control bg-gray input-styles"
+                  id="exampleInputAddress1"
+                  aria-describedby="addressHelp"
+                  placeholder="Enter Token address"
+                />
+                <div id="addressHelp" class="form-text text-gray">e.g. 0x000...</div>
+              </div>
+              <div class="mb-3 px-4">
+                <label for="exampleInputEmail1" class="form-label"></label>
+                <input
+                  type="email"
+                  class="form-control bg-gray input-styles"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="E-mail"
+                />
+                <div id="emailHelp" class="form-text text-gray"></div>
+              </div>
+              <div class="w-max d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-primary text-dark font-weight-bold px-sm-4 px-2 py-3 mb-2 radius1"
+                >
+                  <a href="#" class="text-dark">Continue <img src="./Image/arrow-black.svg" /></a>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END OF ENTER ADDRESS model pop up-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="js/bootstrap-calendar.js"></script>
+    <script src="js/custome.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/select-img.js"></script>
+  </body>
+</html>

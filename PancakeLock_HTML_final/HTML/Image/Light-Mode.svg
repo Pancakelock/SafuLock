@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33.333" height="33.333" viewBox="0 0 33.333 33.333">
+  <g id="Light-Mode" transform="translate(-6364 121)">
+    <g id="Group_3245" data-name="Group 3245" transform="translate(-0.333 -0.333)">
+      <g id="More_Square" data-name="More Square" transform="translate(6364.333 -120.667)">
+        <path id="More_Square-2" data-name="More Square" d="M23.9,33.333H9.45C3.8,33.333,0,29.375,0,23.484V9.867C0,3.965,3.8,0,9.45,0H23.9c5.642,0,9.434,3.965,9.434,9.867V23.484C33.333,29.375,29.542,33.333,23.9,33.333Zm.234-18.664a2,2,0,1,0,1.983,2A2,2,0,0,0,24.133,14.669Zm-7.467,0a2,2,0,1,0,2,2A2,2,0,0,0,16.667,14.669Zm-7.467,0a2,2,0,1,0,2,2A2,2,0,0,0,9.2,14.669Z" transform="translate(0 0)" fill="#f7bd01"/>
+      </g>
+      <rect id="Rectangle_149" data-name="Rectangle 149" width="23" height="15" transform="translate(6371 -111)" fill="#f7bd01"/>
+    </g>
+    <g id="Light" transform="translate(6373 -112)">
+      <path id="Path_8584" data-name="Path 8584" d="M0,0H16V16H0Z" fill="none"/>
+      <path id="Path_8585" data-name="Path 8585" d="M4.665,3.273,3.52,2.137l-.9.895L3.762,4.168ZM2.909,6.865H1V8.135H2.909ZM8.636.55H7.364V2.422H8.636V.55Zm4.741,2.482-.9-.895L11.341,3.273l.9.895Zm-2.043,8.7,1.139,1.142.9-.895-1.145-1.136-.891.889Zm1.756-4.862V8.135H15V6.865ZM8,3.692A3.808,3.808,0,1,0,11.818,7.5,3.816,3.816,0,0,0,8,3.692ZM7.364,14.45H8.636V12.578H7.364ZM2.623,11.968l.9.895,1.139-1.142-.9-.895Z" fill="#fff"/>
+    </g>
+  </g>
+</svg>
