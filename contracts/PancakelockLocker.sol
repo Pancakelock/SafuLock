@@ -3,18 +3,17 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./IUniswapV2Pair.sol";
 
 contract PancakelockLocker is AccessControl, ReentrancyGuard {
-    using SafeMath for uint256;
 
     struct Items {
         address tokenAddress;
         address withdrawalAddress;
         uint256 tokenAmount;
+        uint256 lockTime;
         uint256 unlockTime;
         bool withdrawn;
     }
@@ -49,6 +48,14 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
 
     mapping(address => bool) tokensWhitelist;
 
+    struct WhitelistedTokens{
+        address[] tokens;
+        mapping(address => uint256) indexes;
+    }
+
+    WhitelistedTokens private whitelistedTokens;
+    
+
     event TokensLocked(
         address indexed tokenAddress,
         address indexed sender,
@@ -80,7 +87,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
             "Unix timestamp must be in seconds, not milliseconds"
         );
         require(_unlockTime > block.timestamp, "Unlock time must be in future");
-        require(!_feeInBnb || msg.value > bnbFee, "BNB fee not provided");
+        require(!_feeInBnb || msg.value >= bnbFee, "BNB fee not provided");
 
         require(
             IERC20(_tokenAddress).approve(address(this), _amount),
@@ -97,28 +104,26 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
 
         uint256 lockAmount = _amount;
         if (_feeInBnb) {
-            totalBnbFees = totalBnbFees.add(msg.value);
-            remainingBnbFees = remainingBnbFees.add(msg.value);
+            totalBnbFees += msg.value;
+            remainingBnbFees += msg.value;
         } else {
-            uint256 fee = lockAmount.mul(lpFeePercent).div(1000);
-            lockAmount = lockAmount.sub(fee);
+            uint256 fee = lockAmount * lpFeePercent / 1000;
+            lockAmount -= fee;
 
             if (tokensFees[_tokenAddress] == 0) {
                 tokenAddressesWithFees.push(_tokenAddress);
             }
-            tokensFees[_tokenAddress] = tokensFees[_tokenAddress].add(fee);
+            tokensFees[_tokenAddress] += fee;
         }
 
-        walletTokenBalance[_tokenAddress][msg.sender] = walletTokenBalance[
-            _tokenAddress
-        ][msg.sender]
-        .add(_amount);
+        walletTokenBalance[_tokenAddress][msg.sender] += _amount;
 
         address _withdrawalAddress = msg.sender;
         _id = ++depositId;
         lockedToken[_id].tokenAddress = _tokenAddress;
         lockedToken[_id].withdrawalAddress = _withdrawalAddress;
         lockedToken[_id].tokenAmount = lockAmount;
+        lockedToken[_id].lockTime = block.timestamp;
         lockedToken[_id].unlockTime = _unlockTime;
         lockedToken[_id].withdrawn = false;
 
@@ -156,10 +161,8 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         );
 
         lockedToken[_id].withdrawn = true;
-        uint256 previousBalance = walletTokenBalance[tokenAddress][msg.sender];
-        walletTokenBalance[tokenAddress][msg.sender] = previousBalance.sub(
-            amount
-        );
+        //uint256 previousBalance = walletTokenBalance[tokenAddress][msg.sender];
+        walletTokenBalance[tokenAddress][msg.sender] -= amount;
 
         // Remove depositId from withdrawal addresses mapping
         uint256 i;
@@ -233,6 +236,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
             address,
             uint256,
             uint256,
+            uint256,
             bool
         )
     {
@@ -240,6 +244,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
             lockedToken[_id].tokenAddress,
             lockedToken[_id].withdrawalAddress,
             lockedToken[_id].tokenAmount,
+            lockedToken[_id].lockTime,
             lockedToken[_id].unlockTime,
             lockedToken[_id].withdrawn
         );
@@ -297,10 +302,28 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
 
     function addTokenInWhitelist(address token) external onlyOwner {
         tokensWhitelist[token] = true;
+
+        whitelistedTokens.tokens.push(token);
+        whitelistedTokens.indexes[token] = whitelistedTokens.tokens.length;
+
     }
 
     function removeTokenFromWhitelist(address token) external onlyOwner {
         tokensWhitelist[token] = false;
+        require(whitelistedTokens.tokens.length != 0, "Error: whitelist is empty");
+        if (whitelistedTokens.tokens.length > 1) {
+            uint256 tokenIndex = whitelistedTokens.indexes[token] - 1;
+            uint256 lastIndex = whitelistedTokens.tokens.length - 1;
+            address lastToken = whitelistedTokens.tokens[lastIndex];
+            whitelistedTokens.tokens[tokenIndex] = lastToken;
+            whitelistedTokens.indexes[lastToken] = tokenIndex + 1;
+        }
+        whitelistedTokens.tokens.pop();
+        whitelistedTokens.indexes[token] = 0;
+    }
+
+    function getAllWhitelistedTokens() external view returns(address[] memory tokens){
+        tokens = whitelistedTokens.tokens;
     }
 
     function isTokenInWhitelist(address token) view  public returns (bool) {
@@ -313,5 +336,9 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         } catch {
             return false;
         }
+    }
+
+    function getIndexOfTokenInWhitelist(address token) public view returns(uint256){
+        return whitelistedTokens.indexes[token];
     }
 }

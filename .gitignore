@@ -4,3 +4,5 @@ node_modules/
 bin/
 test.json
 gasEstimation.txt
+output1.sol
+output2.sol
