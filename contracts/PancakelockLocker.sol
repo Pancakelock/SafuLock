@@ -24,9 +24,10 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         _checkRole(ownerRole, _msgSender());
         _;
     }
+
     uint256 public bnbFee = 1 ether;
     // base 1000, 0.5% = value * 5 / 1000
-    uint256 public lpFeePercent = 5;
+    uint256 public tokenFeePercent = 5;
 
     // for statistic
     uint256 public totalBnbFees = 0;
@@ -107,7 +108,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
             totalBnbFees += msg.value;
             remainingBnbFees += msg.value;
         } else {
-            uint256 fee = lockAmount * lpFeePercent / 1000;
+            uint256 fee = lockAmount * tokenFeePercent / 1000;
             lockAmount -= fee;
 
             if (tokensFees[_tokenAddress] == 0) {
@@ -271,9 +272,9 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         bnbFee = fee;
     }
 
-    function setLpFee(uint256 percent) external onlyOwner {
+    function setTokenFee(uint256 percent) external onlyOwner {
         require(percent > 0, "Percent is too small");
-        lpFeePercent = percent;
+        tokenFeePercent = percent;
     }
 
     function withdrawFees(address payable withdrawalAddress)

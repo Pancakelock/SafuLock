@@ -306,6 +306,16 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         unlockTimes = item.unlockTimes;
     }
 
+    function setBnbFee(uint256 fee) external onlyOwner {
+        require(fee > 0, "Fee is too small");
+        bnbFee = fee;
+    }
+
+    function setTokenFee(uint256 percent) external onlyOwner {
+        require(percent > 0, "Percent is too small");
+        tokenFeePercent = percent;
+    }
+
     //PRIVATE AND INTERNAL FUCTIONS:---------------------------------
 
     function createInstance(address token) private returns (address) {
