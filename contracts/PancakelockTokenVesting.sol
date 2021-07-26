@@ -31,6 +31,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         uint256[] percents;
         uint256 lockTime;
         uint256[] unlockTimes;
+        bool withdrawn;
     }
 
     //EVENTS:--------------------------------------------------------
@@ -153,7 +154,8 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
             amount: amountToLock,
             percents: percents,
             lockTime: block.timestamp,
-            unlockTimes: unlockTimes
+            unlockTimes: unlockTimes,
+            withdrawn: false
         });
 
         userVestings[withdrawer].add(id);
@@ -199,7 +201,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         if (currentBalance == 0) {
             destroyInstance(vesting.instance, vesting.owner);
             userVestings[vesting.owner].remove(vestingId);
-            delete vestings[vestingId];
+            vesting.withdrawn = true;
 
             emit OnVestingWithdrawal(vestingId);
         } else {
