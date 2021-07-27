@@ -62,6 +62,8 @@ contract('Locker', ([deployer, withdrawer]) => {
     });
 
     it("is lock creating", async () => {
+        await locker.setMinDaysLock(0);
+
         const unlockTime = new BN(timestamp + 10);
         
         await locker.addTokenInWhitelist(token1Address, {from: deployer});

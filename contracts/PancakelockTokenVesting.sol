@@ -55,16 +55,18 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         address indexed newOwner
     );
     event OnInstanceDestruction(address indexed instance, address receiver);
-    event OnMinimalLockTimeChange(uint256 minimalLockTime);
+    event OnMinimalLockDaysChange(uint256 minimalLockDays);
 
     //FIELDS:--------------------------------------------------------
 
     address public masterContract;
     address payable public feeReceiver;
-    uint256 public minimalLockTime;
+    uint256 public minimalLockDays = 7;
+    uint256 constant SEC_IN_DAY = 86400;
 
     uint256 public bnbFee = 1 ether;
-    uint256 public tokenFeePercent = 5; // 100% = 1000
+    uint256 public tokenFeePercent = 5; // 100% = PERCENT_FACTOR
+    uint256 constant PERCENT_FACTOR = 1000;
 
     uint256 private lastId;
 
@@ -95,13 +97,15 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         require(withdrawer != address(0), "ZERO WITHDRAWER");
         require(token != address(0), "ZERO TOKEN");
         require(
-            unlockTimes[0] > block.timestamp + minimalLockTime,
+            unlockTimes[0] > block.timestamp + minimalLockDays * SEC_IN_DAY,
             "TOO SMALL UNLOCK TIME"
         );
         require(
             unlockTimes[unlockTimes.length - 1] < 10000000000,
             "INVALID UNLOCK TIME, MUST BE UNIX TIME IN SECONDS"
         );
+        require(checkPercents(percents), "INCORRECT PERCENTS");
+        require(checkTimes(unlockTimes), "INCORRECT UNLOCK TIMES");
         _;
     }
 
@@ -188,7 +192,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         require(vesting.percents[lockIndex] != 0, "This lock also withdrawn");
 
         uint256 unlockedAmount = (vesting.amount *
-            vesting.percents[lockIndex]) / 1000;
+            vesting.percents[lockIndex]) / PERCENT_FACTOR;
         IERC20(vesting.token).transferFrom(
             vesting.instance,
             vesting.owner,
@@ -235,9 +239,9 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         feeReceiver = newFeeReceiver;
     }
 
-    function setMinimalLockTime(uint256 newMinimalLockTime) external onlyOwner {
-        minimalLockTime = newMinimalLockTime;
-        emit OnMinimalLockTimeChange(newMinimalLockTime);
+    function setMinimalLockDays(uint256 minDays) external onlyOwner {
+        minimalLockDays = minDays;
+        emit OnMinimalLockDaysChange(minDays);
     }
 
     /**
@@ -331,7 +335,7 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         uint256 amount,
         bool isFeeInBNB
     ) private returns (uint256) {
-        uint256 tokenFee = (amount * tokenFeePercent) / 1000;
+        uint256 tokenFee = (amount * tokenFeePercent) / PERCENT_FACTOR;
         transferFees(token, tokenFee, isFeeInBNB);
         return amount - tokenFee;
     }
@@ -371,5 +375,20 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         IPancakelockTokenVault(instance).destruct(receiver);
 
         emit OnInstanceDestruction(instance, receiver);
+    }
+
+    function checkPercents(uint256[] memory percents) internal pure returns(bool) {
+        uint256 result = 0;
+        for (uint256 i = 0; i < percents.length; i++) {
+            result += percents[i];
+        }
+        return result == PERCENT_FACTOR;
+    }
+
+    function checkTimes(uint256[] memory times) internal pure returns(bool) {
+        for (uint256 i = 1; i < times.length; i++) {
+            if (times[i] < times[i - 1]) return false;
+        }
+        return true;
     }
 }

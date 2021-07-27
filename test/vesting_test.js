@@ -53,6 +53,7 @@ contract('Vesting', ([deployer, feeReciever, withdrawer, user2]) => {
     });
 
     it('is vesting create correctly', async () => {
+        await vesting.setMinimalLockDays(0);
         //INIT PARAMS:
         const time0 = TIMESTAMP.add(TEN);
         const time1 = TIMESTAMP.add(TWENTY);
@@ -76,6 +77,7 @@ contract('Vesting', ([deployer, feeReciever, withdrawer, user2]) => {
         expect(numOfVestings).bignumber.equal(ONE);
     });
     it('is withdraw correct', async () => {
+        await vesting.setMinimalLockDays(0);
         const time0 = TIMESTAMP.add(TEN);
         const time1 = TIMESTAMP.add(TEN.add(ONE));
         const time2 = TIMESTAMP.add(TEN.add(TWO));

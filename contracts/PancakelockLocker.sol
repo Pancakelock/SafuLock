@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./IUniswapV2Pair.sol";
 
 contract PancakelockLocker is AccessControl, ReentrancyGuard {
-
+    //STUCTURES:-----------------------------------------------------
     struct Items {
         address tokenAddress;
         address withdrawalAddress;
@@ -18,44 +18,11 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         bool withdrawn;
     }
 
-    bytes32 constant private ownerRole = keccak256("OWNER");
-
-    modifier onlyOwner() {
-        _checkRole(ownerRole, _msgSender());
-        _;
-    }
-
-    uint256 public bnbFee = 1 ether;
-    // base 1000, 0.5% = value * 5 / 1000
-    uint256 public tokenFeePercent = 5;
-
-    // for statistic
-    uint256 public totalBnbFees = 0;
-    // withdrawable values
-    uint256 public remainingBnbFees = 0;
-    address[] public tokenAddressesWithFees;
-    mapping(address => uint256) public tokensFees;
-
-    uint256 public depositId;
-    uint256[] public allDepositIds;
-
-    mapping(uint256 => Items) public lockedToken;
-
-    mapping(address => uint256[]) public depositsByWithdrawalAddress;
-    mapping(address => uint256[]) public depositsByTokenAddress;
-
-    // Token -> { sender1: locked amount, ... }
-    mapping(address => mapping(address => uint256)) public walletTokenBalance;
-
-    mapping(address => bool) tokensWhitelist;
-
-    struct WhitelistedTokens{
+        struct WhitelistedTokens{
         address[] tokens;
         mapping(address => uint256) indexes;
     }
-
-    WhitelistedTokens private whitelistedTokens;
-    
+    //EVENTS:--------------------------------------------------------
 
     event TokensLocked(
         address indexed tokenAddress,
@@ -70,10 +37,53 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         uint256 amount
     );
 
+    //FIELDS:--------------------------------------------------------
+    bytes32 constant private ownerRole = keccak256("OWNER");
+
+    uint256 public bnbFee = 1 ether;
+    uint256 public tokenFeePercent = 5; //100% = PERCENT_FACTOR;
+    uint256 constant PERCENT_FACTOR = 1000;
+
+    // for statistic
+    uint256 public totalBnbFees = 0;
+    
+    // withdrawable values
+    uint256 public remainingBnbFees = 0;
+    address[] public tokenAddressesWithFees;
+    mapping(address => uint256) public tokensFees;
+
+    uint256 public depositId;
+    uint256[] public allDepositIds;
+
+    mapping(uint256 => Items) public lockedToken;
+    mapping(address => uint256[]) public depositsByWithdrawalAddress;
+    mapping(address => uint256[]) public depositsByTokenAddress;
+
+    // Token -> { sender1: locked amount, ... }
+    mapping(address => mapping(address => uint256)) public walletTokenBalance;
+
+    mapping(address => bool) tokensWhitelist;
+
+    uint256 constant SEC_IN_DAY = 86400;
+    uint256 minDays = 7;
+
+    WhitelistedTokens private whitelistedTokens;
+
+    //MODIFIERS:-----------------------------------------------------
+
+    modifier onlyOwner() {
+        _checkRole(ownerRole, _msgSender());
+        _;
+    }
+
+    //CONSTRUCTOR:---------------------------------------------------
+
     constructor() {
         _setupRole(ownerRole, _msgSender());
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }
+
+    //EXTERNAL AND PUBLIC FUNCTIONS:
 
     function lockTokens(
         address _tokenAddress,
@@ -87,7 +97,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
             _unlockTime < 10000000000,
             "Unix timestamp must be in seconds, not milliseconds"
         );
-        require(_unlockTime > block.timestamp, "Unlock time must be in future");
+        require(_unlockTime > block.timestamp + minDays * SEC_IN_DAY, "Unlock time too small");
         require(!_feeInBnb || msg.value >= bnbFee, "BNB fee not provided");
 
         require(
@@ -108,7 +118,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
             totalBnbFees += msg.value;
             remainingBnbFees += msg.value;
         } else {
-            uint256 fee = lockAmount * tokenFeePercent / 1000;
+            uint256 fee = lockAmount * tokenFeePercent / PERCENT_FACTOR;
             lockAmount -= fee;
 
             if (tokensFees[_tokenAddress] == 0) {
@@ -275,6 +285,10 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
     function setTokenFee(uint256 percent) external onlyOwner {
         require(percent > 0, "Percent is too small");
         tokenFeePercent = percent;
+    }
+
+    function setMinDaysLock(uint256 numOfDays) external onlyOwner {
+        minDays = numOfDays;
     }
 
     function withdrawFees(address payable withdrawalAddress)
