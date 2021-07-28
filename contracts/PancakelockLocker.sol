@@ -98,7 +98,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
             "Unix timestamp must be in seconds, not milliseconds"
         );
         require(_unlockTime > block.timestamp + minDays * SEC_IN_DAY, "Unlock time too small");
-        require(!_feeInBnb || msg.value >= bnbFee, "BNB fee not provided");
+        require(!_feeInBnb || msg.value == bnbFee, "TRANSFERED BNB SHOULD BE EQUAL TO FEE SIZE");
 
         require(
             IERC20(_tokenAddress).approve(address(this), _amount),

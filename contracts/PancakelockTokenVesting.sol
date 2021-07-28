@@ -105,7 +105,6 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
             "INVALID UNLOCK TIME, MUST BE UNIX TIME IN SECONDS"
         );
         require(checkPercents(percents), "INCORRECT PERCENTS");
-        require(checkTimes(unlockTimes), "INCORRECT UNLOCK TIMES");
         _;
     }
 
@@ -273,20 +272,6 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
         return lastId;
     }
 
-    function getNumOfUnlockedParts(uint256 vestingId)
-        public
-        view
-        returns (uint256 result)
-    {
-        uint256 nowTime = block.timestamp;
-        uint256[] memory unlockTimes = vestings[vestingId].unlockTimes;
-
-        for (uint256 i = 0; i < unlockTimes.length; i++) {
-            if (unlockTimes[i] < nowTime) break;
-            result++;
-        }
-    }
-
     function getVestingInfo(uint256 vestingId)
         external
         view
@@ -347,13 +332,13 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
     ) private {
         if (isFeeInBNB) {
             if (bnbFee > 0) {
-                require(msg.value >= bnbFee, "BNB FEES NOT MET");
+                require(msg.value == bnbFee, "TRANSFERED BNB SHOULD BE EQUAL TO FEE SIZE");
                 transferBnb(feeReceiver, bnbFee);
             }
-            if (msg.value > bnbFee) {
-                // transfer excess back
-                transferBnb(msg.sender, msg.value - bnbFee);
-            }
+            // if (msg.value > bnbFee) {
+            //     // transfer excess back
+            //     transferBnb(msg.sender, msg.value - bnbFee);
+            // }
         } else {
             if (tokenFee > 0) {
                 require(
@@ -383,12 +368,5 @@ contract PancakelockTokenVesting is Ownable, AccessControl, ReentrancyGuard {
             result += percents[i];
         }
         return result == PERCENT_FACTOR;
-    }
-
-    function checkTimes(uint256[] memory times) internal pure returns(bool) {
-        for (uint256 i = 1; i < times.length; i++) {
-            if (times[i] < times[i - 1]) return false;
-        }
-        return true;
     }
 }

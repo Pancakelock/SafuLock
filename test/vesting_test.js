@@ -98,7 +98,26 @@ contract('Vesting', ([deployer, feeReciever, withdrawer, user2]) => {
             expect(vestingItem.percents[0]).bignumber.eq(ZERO);
             const currentBalance = await token.balanceOf(instance);
             expect(currentBalance.add(new BN(withdrawnSum))).bignumber.eq(vestAmount);
-        }, 11)
+        }, 11 * 1000)
+        
+    });
+
+    it("is impossible send more bnb then fee", async () => {
+        await vesting.setMinimalLockDays(0);
+        //INIT PARAMS:
+        const time0 = TIMESTAMP.add(TEN);
+        const time1 = TIMESTAMP.add(TWENTY);
+        const time2 = TIMESTAMP.add(THIRTY);
+        const time3 = TIMESTAMP.add(FOURTY);
+        const times = [time0, time1, time2, time3];
+        const percents= [THIRTY.mul(TEN), THIRTY.mul(TEN), THIRTY.mul(TEN), TEN.mul(TEN)];
+        //TEST:
+        
+
+        await expectRevert(
+            vesting.vestTokens(tokenAddress, vestAmount, percents, times, withdrawer, true, { from: withdrawer, value: ONE_TOKEN.add(ONE) }),
+            "TRANSFERED BNB SHOULD BE EQUAL TO FEE SIZE"
+        );
     });
 
 });

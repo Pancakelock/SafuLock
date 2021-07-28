@@ -6,6 +6,12 @@ const Token = artifacts.require('PancakelockToken');
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 const { BN, expectRevert } = require('@openzeppelin/test-helpers');
 
+
+const ZERO = new BN(0);
+const ONE = new BN(1);
+const TWO = new BN(2);
+const THREE = new BN(3);
+const FOUR = new BN(4);
 const FIVE = new BN(5);
 const TEN = new BN(10);
 const DECIMALS = new BN(18);
@@ -67,16 +73,45 @@ contract('Locker', ([deployer, withdrawer]) => {
         const unlockTime = new BN(timestamp + 10);
         
         await locker.addTokenInWhitelist(token1Address, {from: deployer});
-        await token1.transfer(withdrawer, lockAmount, { from: deployer });
-        await token1.approve(lockerAddress, lockAmount, { from: withdrawer });
+        await token1.transfer(withdrawer, lockAmount.mul(TWO), { from: deployer });
+        await token1.approve(lockerAddress, lockAmount.mul(TWO), { from: withdrawer });
 
         await locker.lockTokens(token1Address, lockAmount, unlockTime, false, { from: withdrawer });
 
-        const lockIds = await locker.getDepositsByWithdrawalAddress.call(withdrawer);
-        const lockItem = await locker.lockedToken(lockIds[0]);
-        expect(lockItem.tokenAddress).equal(token1Address);
-        expect(lockItem.withdrawalAddress).equal(withdrawer);
-        expect(lockItem.unlockTime).bignumber.equal(unlockTime);
+        const lockIds1 = await locker.getDepositsByWithdrawalAddress.call(withdrawer);
+        const lockItem1 = await locker.lockedToken(lockIds1[0]);
+        expect(lockItem1.tokenAddress).equal(token1Address);
+        expect(lockItem1.withdrawalAddress).equal(withdrawer);
+        expect(lockItem1.unlockTime).bignumber.equal(unlockTime);
+
+        await locker.lockTokens(token1Address, lockAmount, unlockTime, true, { from: withdrawer, value: ONE_BNB });
+
+        const lockIds2 = await locker.getDepositsByWithdrawalAddress.call(withdrawer);
+        const lockItem2 = await locker.lockedToken(lockIds2[1]);
+        expect(lockItem2.tokenAddress).equal(token1Address);
+        expect(lockItem2.withdrawalAddress).equal(withdrawer);
+        expect(lockItem2.unlockTime).bignumber.equal(unlockTime);
+    });
+
+    it("is impossible send more bnb then fee", async () => {
+        await locker.setMinDaysLock(0);
+        const unlockTime = new BN(timestamp + 10);
+        
+        await locker.addTokenInWhitelist(token1Address, {from: deployer});
+        await token1.transfer(withdrawer, lockAmount.mul(TWO), { from: deployer });
+        await token1.approve(lockerAddress, lockAmount.mul(TWO), { from: withdrawer });
+
+        // await locker.lockTokens(token1Address, lockAmount, unlockTime, false, { from: withdrawer });
+
+        // const lockIds1 = await locker.getDepositsByWithdrawalAddress.call(withdrawer);
+        // const lockItem1 = await locker.lockedToken(lockIds1[0]);
+        // expect(lockItem1.tokenAddress).equal(token1Address);
+        // expect(lockItem1.withdrawalAddress).equal(withdrawer);
+        // expect(lockItem1.unlockTime).bignumber.equal(unlockTime);
+        await expectRevert(
+            locker.lockTokens(token1Address, lockAmount, unlockTime, true, { from: withdrawer, value: ONE_BNB.add(FOUR) }),
+            "TRANSFERED BNB SHOULD BE EQUAL TO FEE SIZE"
+        );
     });
 
 });
