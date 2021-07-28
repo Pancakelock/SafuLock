@@ -81,6 +81,20 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
     constructor() {
         _setupRole(ownerRole, _msgSender());
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+
+        _whitelistToken(0x0eD7e52944161450477ee417DE9Cd3a859b14fD0);
+        _whitelistToken(0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16);
+        _whitelistToken(0xFdFde3aF740A22648B9dD66D05698e5095940850);
+        _whitelistToken(0x92247860A03F48d5c6425c7CA35CDcFCB1013AA1);
+        _whitelistToken(0xC2d00De94795e60FB76Bc37d899170996cBdA436);
+        _whitelistToken(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
+        _whitelistToken(0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82);
+        _whitelistToken(0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56);
+        _whitelistToken(0x1633b7157e7638C4d6593436111Bf125Ee74703F);
+        _whitelistToken(0xaEC945e04baF28b135Fa7c640f624f8D90F1C3a6);
+        _whitelistToken(0x715D400F88C167884bbCc41C5FeA407ed4D2f8A0);
+
+        
     }
 
     //EXTERNAL AND PUBLIC FUNCTIONS:
@@ -92,7 +106,7 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
         bool _feeInBnb
     ) external payable returns (uint256 _id) {
         require(_amount > 0, "Tokens amount must be greater than 0");
-        require(isTokenInWhitelist(_tokenAddress) || isTokenLP(_tokenAddress), "Error: token isn't LP or whitelisted");
+        require(isTokenInWhitelist(_tokenAddress), "Error: token isn't LP or whitelisted");
         require(
             _unlockTime < 10000000000,
             "Unix timestamp must be in seconds, not milliseconds"
@@ -316,11 +330,15 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
     }
 
     function addTokenInWhitelist(address token) external onlyOwner {
+        _whitelistToken(token);
+
+    }
+
+    function _whitelistToken(address token) private {
         tokensWhitelist[token] = true;
 
         whitelistedTokens.tokens.push(token);
         whitelistedTokens.indexes[token] = whitelistedTokens.tokens.length;
-
     }
 
     function removeTokenFromWhitelist(address token) external onlyOwner {
@@ -343,14 +361,6 @@ contract PancakelockLocker is AccessControl, ReentrancyGuard {
 
     function isTokenInWhitelist(address token) view  public returns (bool) {
         return tokensWhitelist[token];
-    }
-
-    function isTokenLP(address token) view public returns (bool) {
-        try IUniswapV2Pair(token).token0() {
-            return true;
-        } catch {
-            return false;
-        }
     }
 
     function getIndexOfTokenInWhitelist(address token) public view returns(uint256){
