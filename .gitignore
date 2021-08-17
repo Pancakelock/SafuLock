@@ -1,0 +1,9 @@
+build/
+node_modules/
+.env
+bin/
+test.json
+gasEstimation.txt
+output1.sol
+output2.sol
+desktop.ini
