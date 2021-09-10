@@ -1,0 +1,58 @@
+@import '../../../../styles/vars';
+@import '../../../../styles/theme.scss';
+
+.days {
+  padding: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
+
+  background: var(--background-secondary);
+  border-radius: 10px;
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &_value {
+      margin-bottom: 5px;
+
+      max-width: 102px;
+
+      input {
+        font-size: 30px;
+        text-align: center;
+
+        color: var(--text-yellow-black);
+        border-radius: 10px;
+
+        &:hover,
+        &:focus {
+          background: var(--background-select);
+        }
+      }
+    }
+
+    span {
+      width: 100%;
+
+      text-align: center;
+    }
+  }
+
+  &-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .ant-select-arrow .anticon {
+    display: none;
+  }
+}

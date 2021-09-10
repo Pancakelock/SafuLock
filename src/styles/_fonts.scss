@@ -1,0 +1,7 @@
+@import './mixins/main';
+//Montserrat
+@include font-face('Nunito', '../assets/fonts/Nunito-Regular', normal);
+// @include font-face('Nunito', '../assets/fonts/Nunito-Medium', 500);
+@include font-face('Nunito', '../assets/fonts/Nunito-SemiBold', 600);
+@include font-face('Nunito', '../assets/fonts/Nunito-Bold', 700);
+@include font-face('Nunito', '../assets/fonts/Nunito-ExtraBold', 800);

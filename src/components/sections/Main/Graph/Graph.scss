@@ -1,0 +1,55 @@
+@import '../../../../styles/theme.scss';
+@import '../../../../styles/vars';
+@import '../../../../styles/mixins/media.scss';
+
+.graph {
+  padding: 30px;
+
+  max-width: 350px;
+
+  background: var(--background-gray-white);
+  border: 1px solid var(--card-border);
+  @include b('extramobile') {
+    max-width: 290px;
+  }
+  @include b('tablet') {
+    margin: 10px auto 20px;
+  }
+
+  &_header {
+    width: 100%;
+
+    &_title {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      span {
+        padding: 5px 0;
+      }
+    }
+  }
+
+  &_body {
+    &_image {
+      padding: 5px 0 40px 0;
+    }
+
+    &_text {
+      padding: 10px 0;
+
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+
+      strong {
+        font-size: 20px;
+      }
+    }
+    @include b('tablet') {
+      &-btn {
+        width: 80%;
+      }
+    }
+  }
+}

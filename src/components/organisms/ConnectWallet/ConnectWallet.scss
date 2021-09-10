@@ -1,0 +1,124 @@
+@import '../../../styles/vars';
+@import '../../../styles/theme.scss';
+@import '../../../styles/mixins/media.scss';
+
+.card_overlay {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.card-wallet {
+  position: absolute;
+  z-index: 100;
+  top: 200px;
+  right: 0;
+  left: 0;
+
+  margin: 0 auto;
+  padding: 20px 25px;
+
+  min-width: 430px;
+  max-width: 430px;
+
+  background: var(--background-primary);
+  border: 1px solid rgba(153, 153, 153, 1);
+  border-radius: 10px;
+
+  &_title {
+    margin-bottom: 10px;
+
+    span {
+      padding: 10px 20px 5px 10px;
+    }
+  }
+
+  &_body {
+    &_error {
+      position: relative;
+      top: -8px;
+
+      text-align: center;
+
+      color: #ff4d4f;
+    }
+
+    &_box1,
+    &_box2 {
+      margin: 10px 0;
+      padding-left: 20px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      width: 100%;
+
+      border-radius: 10px;
+
+      span {
+        padding-left: 20px;
+
+        width: fit-content;
+      }
+    }
+
+    &_btns {
+      label {
+        padding: 0;
+
+        width: 100%;
+
+        border: 2px solid rgba(0, 0, 0, 0) !important;
+        border-radius: 10px !important;
+      }
+
+      .ant-radio-button-wrapper {
+        padding: 10px;
+
+        background: var(--background-secondary);
+      }
+
+      .ant-radio-button-wrapper:last-child {
+        margin-top: 20px;
+      }
+
+      .ant-radio-button-wrapper-checked {
+        background: linear-gradient(
+          180deg,
+          rgba(246, 188, 43, 0.2) 0%,
+          rgba(0, 0, 0, 0) 100%
+        ) !important;
+        border: 2px solid rgba(246, 188, 43, 1) !important;
+      }
+    }
+
+    &_btn-cont {
+      margin-top: 20px;
+
+      width: 100%;
+    }
+  }
+  @include b('mobile') {
+    position: fixed;
+    top: 20px;
+
+    margin: 0 auto;
+
+    min-width: 100vw;
+    max-width: 100vw;
+  }
+}

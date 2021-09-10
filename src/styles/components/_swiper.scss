@@ -1,0 +1,41 @@
+// .swiper {
+//   &-navigation {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     width: 56px;
+//     height: 56px;
+
+//     cursor: pointer;
+
+//     background: $green;
+//     border: 3px solid $green;
+//     border-radius: 50%;
+
+//     transition: 0.3s;
+
+//     svg {
+//       path {
+//         transition: 0.3s;
+//         stroke: #fff;
+//       }
+//     }
+
+//     &-next {
+//       transform: rotate(180deg);
+//     }
+//   }
+// }
+
+// .swiper-button {
+//   &-disabled {
+//     background: transparent;
+
+//     svg {
+//       path {
+//         stroke: $green;
+//       }
+//     }
+//   }
+// }

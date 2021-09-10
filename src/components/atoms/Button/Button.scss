@@ -1,0 +1,91 @@
+@import '../../../styles/vars';
+
+.btn {
+  span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: fit-content;
+
+    height: auto;
+  }
+
+  &-yellow {
+    color: $black;
+    background: $yellow;
+    border: none;
+  }
+
+  &-white-btn {
+    color: rgba(153, 153, 153, 1);
+    background: $white-btn;
+  }
+
+  &-none {
+    color: rgba(0, 0, 0, 0);
+    background: rgb(0, 0, 0);
+    border: none;
+  }
+
+  .btn-icon {
+    margin-left: 10px;
+    padding: 0;
+  }
+
+  &-primary {
+    padding: 15px 50px 35px 50px;
+
+    border-radius: 10px;
+  }
+
+  &-secondary {
+    padding: 5.2px 14px 6px 14px;
+
+    height: 32px;
+
+    border-radius: 10px;
+  }
+
+  &-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background: rgba(0, 0, 0, 0);
+  }
+
+  &-img {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.btn-yellow:hover,
+.btn-yellow:focus {
+  color: $black;
+  background: $yellow-hover;
+}
+
+.btn-white-btn:hover,
+.btn-white-btn:focus {
+  color: rgba(153, 153, 153, 1);
+  background: $white-hover;
+}
+
+.btn-none:hover,
+.btn-none:focus {
+  color: rgba(0, 0, 0, 0);
+  background: rgb(0, 0, 0);
+  border: none;
+}
+
+.btn-close:hover,
+.btn-close:focus {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background: rgba(0, 0, 0, 0);
+}

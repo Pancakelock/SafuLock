@@ -1,0 +1,45 @@
+@import '../../../styles/vars';
+@import '../../../styles/theme.scss';
+
+.box {
+  margin-top: 10px;
+
+  width: 100%;
+
+  &_title {
+    text-align: left;
+  }
+
+  &_body {
+    margin-top: 7px;
+    padding: 20px 15px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    background: var(--background-secondary);
+    border-radius: 10px;
+    overflow-wrap: anywhere;
+
+    a {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      color: var(--text-white-black);
+
+      img {
+        margin-right: 4px;
+      }
+    }
+
+    span {
+      font-size: 16px;
+    }
+  }
+}

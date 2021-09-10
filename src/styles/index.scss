@@ -1,0 +1,41 @@
+@import './reset';
+@import 'mixins/media';
+@import './fonts';
+@import './vars';
+@import './typography';
+@import './components/index.scss';
+@import './theme.scss';
+
+html,
+body {
+  margin: 0;
+
+  height: max-content;
+  min-height: 100vh;
+
+  font-family: Nunito, sans-serif;
+  font-weight: 400;
+
+  background-color: rgba(0, 0, 0, 0.11);
+  background-image: url('../assets/img/background-white.png');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+}
+
+.br {
+  border-radius: 10px;
+}
+
+.noClick {
+  cursor: default;
+}
+
+.wrap-any {
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,88 @@
+@import '../../styles/mixins/media.scss';
+@import '../../styles/mixins/container.scss';
+@import '../../styles/vars';
+@import '../../styles/theme.scss';
+
+.vesting {
+  @include container(1100px);
+  margin-top: 75px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  background: var(--background-primary);
+  border-radius: 10px;
+
+  h1 {
+    padding-left: 10px;
+    @include b('tablet') {
+      text-align: center;
+    }
+  }
+
+  &_tokens {
+    margin-top: 20px;
+
+    min-width: 438px;
+    @include b('tablet') {
+      min-width: 100%;
+    }
+  }
+
+  &_unlocks {
+    width: 100%;
+    @include b('extramobile') {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &_add {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    width: 100%;
+
+    &-btn {
+      margin: 20px 0 30px 0;
+    }
+    @include b('tablet') {
+      justify-content: center;
+    }
+  }
+
+  &_text {
+    margin: 0 auto 30px;
+
+    max-width: 500px;
+
+    text-align: center;
+    @include b('tablet') {
+      margin: 10px auto;
+    }
+  }
+
+  &_bnts {
+    margin: 20px auto 0;
+
+    width: 50%;
+
+    &-btn {
+      width: 100%;
+    }
+  }
+  @include b('mobile') {
+    max-width: 430px;
+  }
+
+  @include b('extramobile') {
+    max-width: 90%;
+  }
+}

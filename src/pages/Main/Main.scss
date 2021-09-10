@@ -1,0 +1,58 @@
+@import '../../styles/mixins/container.scss';
+@import '../../styles/mixins/media.scss';
+
+.main {
+  @include container();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  &_title {
+    margin: 35px 0;
+  }
+
+  &_cards {
+    margin-top: 35px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+
+    width: 60%;
+    @include b('tablet') {
+      padding-bottom: 20px;
+
+      display: grid;
+
+      width: 100%;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      grid-gap: 10px 0;
+    }
+    @include b('mobile') {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &_info {
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 100%;
+    @include b('tablet') {
+      margin-bottom: 20px;
+
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+}

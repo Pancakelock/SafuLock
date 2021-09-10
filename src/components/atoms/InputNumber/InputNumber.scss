@@ -1,0 +1,155 @@
+@import '../../../styles/vars';
+
+.input-number {
+  width: 100%;
+
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0);
+  box-shadow: none;
+
+  &__box {
+    width: 100%;
+
+    &-isValid {
+      border: 1px solid #ff4d4f !important;
+    }
+  }
+
+  &__prefix {
+    margin-right: 13px;
+  }
+
+  &:not(:only-child) {
+    input {
+      padding-right: 5px;
+    }
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  input {
+    width: 100%;
+    height: auto;
+
+    border: none;
+  }
+
+  &__prefix-bottom {
+    margin: -20px 20px 15px;
+    margin-top: -20px;
+  }
+
+  &-lg {
+    &-box {
+      border-radius: 40px;
+    }
+
+    input {
+      padding: 25px 20px;
+
+      height: auto;
+
+      font-size: 25px;
+      font-weight: 500;
+      line-height: 30px;
+    }
+  }
+
+  &-md {
+    &-box {
+      border-radius: 30px;
+    }
+
+    input {
+      padding: 20px;
+
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  &-sm {
+    &-box {
+      border-radius: 10px;
+    }
+
+    input {
+      padding: 5px;
+
+      font-size: 19px;
+    }
+  }
+
+  &-outline {
+    border: none;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      border: none !important;
+      border-color: transparent;
+      box-shadow: none !important;
+    }
+
+    &-box {
+      overflow: hidden;
+
+      color: $gray;
+      border: 1px solid $yellow;
+
+      &.active {
+        background: $yellow;
+      }
+    }
+
+    input {
+      background: transparent;
+    }
+  }
+
+  &-gray {
+    &-box {
+      border-radius: 10px;
+    }
+
+    &:hover,
+    &:focus {
+      border: 1px solid $yellow;
+      border-radius: 10px;
+    }
+
+    input {
+      color: $yellow;
+      background: transparent;
+    }
+  }
+
+  &-white {
+    &-box {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover,
+    &:focus {
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    input {
+      background: transparent;
+    }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+
+  .ant-input-number-handler-wrap {
+    display: none;
+  }
+}

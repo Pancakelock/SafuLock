@@ -1,0 +1,93 @@
+@import '../../../styles/vars';
+@import '../../../styles/mixins/media.scss';
+@import '../../../styles/theme.scss';
+
+.calendar {
+  .ant-picker-calendar-mini {
+    background: rgba(0, 0, 0, 0);
+
+    .ant-picker-panel {
+      background: rgba(0, 0, 0, 0);
+      border-top: none;
+
+      .ant-picker-content {
+        th {
+          padding: 10px;
+
+          font-size: 18px;
+          text-align: center;
+
+          color: $yellow;
+        }
+      }
+
+      .ant-picker-body {
+        .ant-picker-cell-in-view {
+          color: var(--text-white-black) !important;
+          border: 1px solid rgba(109, 109, 109, 0.3);
+        }
+
+        .ant-picker-cell {
+          color: $gray-txt;
+          border: 1px solid rgba(109, 109, 109, 0.3);
+        }
+      }
+    }
+  }
+
+  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+  .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+  .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    background: $yellow !important;
+  }
+
+  .ant-picker-calendar-date-value:hover,
+  .ant-picker-calendar-date-value:focus,
+  .ant-picker-calendar-date-value:active {
+    background: $yellow !important;
+  }
+
+  .ant-picker-cell .ant-picker-cell-inner:hover {
+    background: $yellow !important;
+  }
+
+  .ant-picker-cell::before:hover {
+    background: $yellow !important;
+  }
+
+  .ant-radio-button-wrapper {
+    font-size: 18px;
+
+    color: $yellow;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    border-radius: 10px;
+
+    &:hover {
+      background: rgb(80, 80, 80);
+      border: none;
+    }
+  }
+
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):first-child {
+    background: rgb(80, 80, 80);
+    border: none;
+  }
+
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+    color: $yellow;
+  }
+
+  .ant-radio-button-wrapper:not(:first-child)::before {
+    background: none;
+  }
+
+  .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector {
+    color: $yellow;
+    background: rgb(80, 80, 80);
+  }
+
+  .ant-select-arrow {
+    color: $yellow;
+  }
+}

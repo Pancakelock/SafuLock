@@ -1,0 +1,15 @@
+@import '../../../styles/vars';
+@import '../../../styles/theme.scss';
+
+.ant-space-item {
+  span {
+    font-size: 16px;
+    font-weight: 900;
+
+    color: var(--text-white-black);
+
+    strong {
+      color: $yellow;
+    }
+  }
+}

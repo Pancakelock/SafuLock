@@ -1,0 +1,31 @@
+@import '../../../styles/vars';
+
+.footer {
+  margin-top: 260px;
+  padding-bottom: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+
+  &-links {
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      margin-right: 15px;
+    }
+  }
+
+  &-text {
+    margin-top: 30px;
+
+    text-align: center;
+  }
+}

@@ -1,0 +1,69 @@
+@import '../../../styles/vars';
+@import '../../../styles/theme.scss';
+
+.dropDown {
+  ul {
+    padding: 9px 4px;
+
+    background: var(--background-black-white);
+    border-radius: 19px;
+
+    li {
+      font-weight: 600;
+
+      .drop-btn {
+        width: 100%;
+
+        font-weight: 400;
+
+        border-radius: 5px;
+      }
+    }
+
+    li:first-child {
+      border-top-left-radius: 19px;
+      border-top-right-radius: 19px;
+    }
+
+    li:last-child {
+      border-bottom-right-radius: 19px;
+      border-bottom-left-radius: 19px;
+    }
+
+    li:hover {
+      background: var(--background-drop-hover) !important;
+    }
+  }
+
+  &_icon {
+    margin-right: 7px;
+  }
+
+  &_theme {
+    &-btn,
+    &-btn:hover,
+    &-btn:focus {
+      background: none;
+    }
+
+    &-text {
+      font-weight: 400;
+
+      color: $black;
+    }
+  }
+
+  .ant-dropdown-menu-title-content > a {
+    color: $black;
+  }
+  // .ant-dropdown-menu-title-content:hover {
+  //   background: var(--background-black-white);
+  // }
+  &_menu-btn,
+  &_menu-btn:hover,
+  &_menu-btn:focus {
+    padding-top: 3px;
+
+    background: none;
+  }
+}

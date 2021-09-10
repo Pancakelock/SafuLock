@@ -1,0 +1,24 @@
+@import '../../../styles/theme.scss';
+
+.search {
+  margin-bottom: 30px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background: var(--background-gray-yellow);
+  border-radius: 10px;
+
+  &__img {
+    margin-right: 12px;
+    margin-bottom: -3px;
+
+    cursor: pointer;
+  }
+
+  &-gray {
+    background: var(--background-gray-yellow);
+  }
+}
