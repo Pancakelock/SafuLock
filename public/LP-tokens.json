@@ -1,0 +1,82 @@
+[
+  {
+    "address": "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0",
+    "name": "Pancake LPs",
+    "symbol": "Cake-LP",
+    "decimals": 18,
+    "token0": {
+      "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+      "symbol": "Cake",
+      "image": "CAKE.svg"
+    },
+    "token1": {
+      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "symbol": "WBNB",
+      "image": "WBNB.svg"
+    }
+  },
+  {
+    "address": "0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16",
+    "name": "Pancake LPs",
+    "symbol": "Cake-LP",
+    "decimals": 18,
+    "token0": {
+      "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+      "symbol": "BUSD",
+      "image": "BUSD.svg"
+    },
+    "token1": {
+      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "symbol": "WBNB",
+      "image": "WBNB.svg"
+    }
+  },
+  {
+    "address": "0xFdFde3aF740A22648B9dD66D05698e5095940850",
+    "name": "Pancake LPs",
+    "symbol": "Cake-LP",
+    "decimals": 18,
+    "token0": {
+      "address": "0x1633b7157e7638C4d6593436111Bf125Ee74703F",
+      "symbol": "SPS",
+      "image": "SPS.svg"
+    },
+    "token1": {
+      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "symbol": "WBNB",
+      "image": "WBNB.svg"
+    }
+  },
+  {
+    "address": "0x92247860A03F48d5c6425c7CA35CDcFCB1013AA1",
+    "name": "Pancake LPs",
+    "symbol": "Cake-LP",
+    "decimals": 18,
+    "token0": {
+      "address": "0xaEC945e04baF28b135Fa7c640f624f8D90F1C3a6",
+      "symbol": "C98",
+      "image": "C98.svg"
+    },
+    "token1": {
+      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "symbol": "WBNB",
+      "image": "WBNB.svg"
+    }
+  },
+  {
+    "address": "0xC2d00De94795e60FB76Bc37d899170996cBdA436",
+    "name": "Pancake LPs",
+    "symbol": "Cake-LP",
+    "decimals": 18,
+    "token0": {
+      "address": "0x715D400F88C167884bbCc41C5FeA407ed4D2f8A0",
+      "symbol": "AXS",
+      "image": "AXS.svg"
+    },
+    "token1": {
+      "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "symbol": "WBNB",
+      "image": "WBNB.svg"
+    }
+  }
+]

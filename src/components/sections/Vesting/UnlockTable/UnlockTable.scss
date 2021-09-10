@@ -1,0 +1,95 @@
+@import '../../../../styles/mixins/media.scss';
+
+.table-unlock-desktop {
+  width: 100%;
+  max-width: 100%;
+
+  border-spacing: 12px;
+  border-collapse: inherit;
+
+  th,
+  td {
+    vertical-align: middle;
+
+    border: none;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  &-btn {
+    padding: 7px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    span {
+      .btn-icon {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.table-unlock-mobile {
+  display: none;
+}
+
+@include b('mobile') {
+  .table-unlock-desktop {
+    display: none;
+  }
+
+  .table-unlock-mobile {
+    margin-top: 10px;
+
+    display: block;
+
+    &_row {
+      margin: 10px auto 0;
+      padding: 10px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+
+      border: 1px solid rgba(79, 79, 79, 1);
+      border-radius: 10px;
+      flex-wrap: wrap;
+      @media (max-width: 360px) {
+        width: 248px;
+      }
+    }
+
+    &_coll {
+      margin: 10px 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      width: 100%;
+    }
+
+    &-btn {
+      margin: 0 auto;
+      padding: 7px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        .btn-icon {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

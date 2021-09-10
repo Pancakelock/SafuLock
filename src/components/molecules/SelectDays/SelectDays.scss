@@ -1,0 +1,34 @@
+@import '../../../styles/vars';
+@import '../../../styles/theme';
+
+.select-days-bar {
+  margin-bottom: 10px;
+
+  background: var(--background-select);
+  border: none !important;
+  border-radius: 5px;
+
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    margin: 0;
+
+    height: 30px;
+
+    font-weight: 900;
+
+    color: var(--text-white-black);
+    background: none !important;
+    border: none !important;
+    border-radius: 5px;
+  }
+
+  &-arrow {
+    padding-right: 5px;
+  }
+}
+
+.ant-select-focused:not(.ant-select-disabled),
+.ant-select:not(.ant-select-customize-input),
+.ant-select-selector {
+  border-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+}

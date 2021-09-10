@@ -1,0 +1,66 @@
+@import '../../styles/vars';
+@import '../../styles/theme.scss';
+@import '../../styles/mixins/media.scss';
+
+.configure {
+  @include b('extramobile') {
+    width: 90%;
+  }
+  margin: 70px auto 0;
+  padding: 20px;
+
+  width: 450px;
+
+  background: var(--background-primary);
+  border-radius: 10px;
+
+  &_title {
+    margin-bottom: 30px;
+
+    font-size: 24px;
+
+    img {
+      margin-right: 15px;
+    }
+  }
+
+  &_boxes {
+    margin-top: 10px;
+
+    width: 100%;
+  }
+
+  &_btns {
+    margin-top: 20px;
+
+    width: 100%;
+
+    &_btn {
+      width: 100%;
+    }
+  }
+
+  &_radio-box {
+    margin-top: 20px;
+
+    width: 100%;
+  }
+}
+
+.ant-radio-checked::after {
+  background: $yellow;
+  border: 1px solid $gray;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  background: $yellow;
+  border-color: $gray;
+}
+
+.ant-radio-inner::after {
+  background-color: $white;
+}
+
+.ant-radio-inner {
+  background: rgba(0, 0, 0, 0);
+}

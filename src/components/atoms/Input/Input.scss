@@ -1,0 +1,65 @@
+@import '../../../styles/vars';
+
+.input {
+  padding: 0;
+
+  color: $white;
+  border: none;
+
+  &:hover,
+  &:focus {
+    border: none;
+    box-shadow: none;
+  }
+
+  &-md {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  &-lg {
+    padding: 20px 18px;
+  }
+
+  &-transparent {
+    background: transparent;
+
+    &::placeholder {
+      font-weight: 500;
+
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &-outline {
+    border: none;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      border: none !important;
+      border-color: transparent;
+      box-shadow: none !important;
+    }
+
+    &-box {
+      overflow: hidden;
+
+      color: $gray;
+      border: 1px solid $yellow;
+
+      &.active {
+        background: $yellow;
+      }
+    }
+
+    input {
+      background: transparent;
+    }
+  }
+}
+
+.ant-input[disabled] {
+  color: var(--text-yellow-black);
+  background-color: var(--background-secondary);
+}

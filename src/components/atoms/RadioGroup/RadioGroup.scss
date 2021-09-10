@@ -1,0 +1,33 @@
+@import '../../../styles/vars';
+
+.r-group {
+  background: rgba(0, 0, 0, 0);
+
+  &__btn {
+    // &:hover {
+    //   color: rgba(0, 0, 0, 0.5) !important;
+    // }
+    height: auto;
+
+    text-align: center;
+
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+
+    &:first-child {
+      margin-right: 15px;
+
+      border: none;
+    }
+
+    &:not(:first-child)::before {
+      display: none;
+    }
+  }
+
+  .ant-radio-button-wrapper-checked {
+    background: $black !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}

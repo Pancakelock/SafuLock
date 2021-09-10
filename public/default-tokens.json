@@ -1,0 +1,44 @@
+[
+  {
+    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "name": "Wrapped BNB",
+    "symbol": "WBNB",
+    "decimals": 18,
+    "image": "WBNB.svg"
+  },
+  {
+    "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    "name": "PancakeSwap Token",
+    "symbol": "Cake",
+    "decimals": 18,
+    "image": "CAKE.svg"
+  },
+  {
+    "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    "name": "BUSD Token",
+    "symbol": "BUSD",
+    "decimals": 18,
+    "image": "BUSD.svg"
+  },
+  {
+    "address": "0x1633b7157e7638C4d6593436111Bf125Ee74703F",
+    "name": "Splintershards",
+    "symbol": "SPS",
+    "decimals": 18,
+    "image": "SPS.svg"
+  },
+  {
+    "address": "0xaEC945e04baF28b135Fa7c640f624f8D90F1C3a6",
+    "name": "Coin98",
+    "symbol": "C98",
+    "decimals": 18,
+    "image": "C98.svg"
+  },
+  {
+    "address": "0x715D400F88C167884bbCc41C5FeA407ed4D2f8A0",
+    "name": "Axie Infinity Shard",
+    "symbol": "AXS",
+    "decimals": 18,
+    "image": "AXS.svg"
+  }
+]

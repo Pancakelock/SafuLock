@@ -1,0 +1,139 @@
+@import '../../../../styles/theme.scss';
+@import '../../../../styles/mixins/media.scss';
+
+.content_toggle {
+  margin-top: 15px;
+  margin-right: 25px;
+
+  width: 100%;
+
+  .content-main {
+    padding: 20px;
+
+    width: 100%;
+
+    text-align: left;
+
+    background: var(--background-primary);
+    border: 1px solid var(--table-border);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    table {
+      width: 100%;
+
+      border-spacing: 0 5px;
+      border-collapse: separate;
+
+      thead {
+        width: 100%;
+
+        font-size: 13px;
+
+        color: $yellow;
+
+        th {
+          text-align: center;
+        }
+      }
+
+      tbody {
+        a {
+          color: var(--text-white-black);
+        }
+
+        tr:nth-child(odd) {
+          background: var(--background-secondary);
+        }
+
+        td {
+          padding: 20px 13px;
+
+          text-align: center;
+
+          color: var(--text-white-black);
+
+          &:first-child {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+          }
+
+          &:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+          }
+        }
+      }
+    }
+
+    &_search {
+      input {
+        color: var(--text-white-black);
+      }
+
+      ::-webkit-input-placeholder {
+        color: rgba(153, 153, 153, 1);
+      }
+    }
+
+    .table-locked-mobile {
+      display: none;
+    }
+  }
+}
+
+@include b('mobile') {
+  .content_toggle {
+    margin-top: 40px;
+
+    .content-main {
+      margin-bottom: 30px;
+
+      border-top-right-radius: 0;
+
+      table {
+        tr {
+          margin: 0 auto;
+
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          flex-wrap: wrap;
+        }
+      }
+
+      .table-locked-mobile {
+        display: grid;
+        grid-template-rows: repeat(auto-fill, minmax(240px, 1fr));
+
+        td {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+
+          text-align: left;
+
+          span {
+            margin: 5px 0;
+          }
+
+          &:nth-child(1),
+          &:nth-child(3) {
+            padding-right: 0;
+          }
+        }
+
+        tr {
+          margin: 10px 0;
+
+          background: var(--background-secondary);
+          border-radius: 10px;
+        }
+      }
+
+      .table-locked-desktop {
+        display: none;
+      }
+    }
+  }
+}

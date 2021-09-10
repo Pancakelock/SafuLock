@@ -1,0 +1,45 @@
+:root {
+  --background-primary: rgba(255, 255, 255, 1);
+  --background-secondary: rgba(245, 245, 245, 1);
+  --background-yellow-secondary: rgba(247, 189, 1, 1);
+  --background-gray-yellow: rgb(255, 234, 183);
+  --background-black-yellow: rgba(239, 190, 65, 1);
+  --background-gray-white: rgba(255, 255, 255, 0.5);
+  --background-black-white: rgba(238, 238, 238, 1);
+  --background-drop-hover: rgba(255, 255, 255, 0.5);
+  --background-select: rgba(147, 147, 147, 0.2);
+  --background-arrow-back: url('../assets/img/arrow-white-back.svg');
+  --table-border: rgba(247, 189, 1, 1);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --text-yellow-white: rgba(255, 255, 255, 1);
+  --text-yellow-black: rgba(0, 0, 0, 1);
+  --text-yellow-white: rgba(255, 255, 255, 1);
+  --text-white-gray: rgba(103, 103, 103, 1);
+  --text-white-black: rgba(0, 0, 0, 1);
+  --text-gray-black: rgba(0, 0, 0, 1);
+  --text-yellow-gray: rgba(103, 103, 103, 1);
+}
+
+#dark {
+  --background-primary: rgba(21, 21, 21, 1);
+  --background-secondary: rgba(35, 35, 35, 1);
+  --background-yellow-secondary: rgba(35, 35, 35, 1);
+  --background-gray-yellow: rgba(35, 35, 35, 1);
+  --background-black-yellow: rgba(21, 21, 21, 1);
+  --background-gray-white: rgba(21, 21, 21, 0.5);
+  --background-black-white: rgba(21, 21, 21, 1);
+  --background-drop-hover: rgba(35, 35, 35, 1);
+  --background-select: rgb(99, 97, 97);
+  --background-arrow-back: url('../assets/img/arrow-black-back.svg');
+  --table-border: rgba(0, 0, 0, 0);
+  --card-border: rgba(0, 0, 0, 0);
+  --text-yellow-white: rgba(239, 190, 65, 1);
+  --text-yellow-black: rgba(247, 189, 1, 1);
+  --text-yellow-white: rgba(247, 189, 1, 1);
+  --text-white-gray: #fff;
+  --text-white-black: #fff;
+  --text-gray-black: rgba(153, 153, 153, 1);
+  --text-yellow-gray: rgba(247, 189, 1, 1);
+  background-color: rgba(0, 0, 0, 0.6);
+  background-image: url('../assets/img/background-dark.png');
+}

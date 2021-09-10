@@ -1,0 +1,43 @@
+@import '../../../../styles/vars';
+@import '../../../../styles/theme.scss';
+@import '../../../../styles/mixins/media.scss';
+
+.unlock-amount {
+  padding: 15px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  background: var(--background-secondary);
+  border-radius: 10px;
+
+  &_input {
+    font-size: 19px;
+
+    color: var(--text-yellow-black);
+  }
+  @include b('tablet') {
+    &-right {
+      span {
+        font-size: 16px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  @include b('mobile') {
+    padding: 5px 10px;
+
+    width: 100%;
+
+    input {
+      font-size: 16px;
+    }
+
+    span {
+      font-size: 16px;
+    }
+  }
+}

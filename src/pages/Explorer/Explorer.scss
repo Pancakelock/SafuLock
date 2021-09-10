@@ -1,0 +1,160 @@
+@import '../../styles/mixins/container.scss';
+@import '../../styles/mixins/media.scss';
+@import '../../styles/vars';
+@import '../../styles/theme.scss';
+
+.explorer {
+  @include container(1100px);
+  margin-top: 75px;
+  padding: 25px 15px 25px 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  background: var(--background-primary);
+  border-radius: 10px;
+
+  @include b('extramobile') {
+    margin: 75px auto;
+
+    width: 90%;
+  }
+
+  &_header {
+    padding: 0 0 20px 10px;
+
+    width: 100%;
+
+    &_btn,
+    &_btn:hover,
+    &_btn:focus {
+      margin: 0;
+      padding: 0;
+
+      background: none;
+
+      span {
+        font-size: 50px;
+        font-weight: 900;
+
+        color: var(--text-white-black);
+      }
+    }
+  }
+
+  &_body {
+    padding: 0 12px;
+
+    width: 100%;
+
+    &_info {
+      width: 100%;
+    }
+
+    &_boxes {
+      display: flex;
+      flex-direction: column;
+
+      &_row {
+        margin-bottom: 10px;
+
+        display: flex;
+        flex-direction: row;
+
+        width: 100%;
+        @include b('tablet') {
+          margin-bottom: 20px;
+
+          width: 420px;
+        }
+
+        @include b('extramobile') {
+          margin-bottom: 20px;
+
+          width: 240px;
+        }
+
+        &_buttons {
+          width: 100%;
+
+          &-btn {
+            margin-bottom: 10px;
+
+            width: 100%;
+          }
+        }
+
+        &-locked {
+          background: var(--background-yellow-secondary);
+        }
+
+        &-w100 {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.card-exp_body_row-left {
+  img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.images-container {
+  margin-right: 10px;
+
+  width: 100%;
+
+  .card-exp {
+    height: 150px;
+  }
+
+  .card-exp_body_row-left {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    img:last-child {
+      position: relative;
+      right: 10px;
+    }
+  }
+}
+
+@include b('tablet') {
+  .explorer {
+    padding: 22px;
+
+    max-width: fit-content;
+
+    &_header {
+      padding: 0 0 20px 0;
+    }
+
+    &_body {
+      padding: 0;
+
+      &_boxes_row {
+        display: grid;
+        grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+        grid-gap: 20px;
+        @include b('tablet') {
+          margin: 0 auto 20px;
+
+          width: 420px;
+        }
+        @include b('mobile') {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

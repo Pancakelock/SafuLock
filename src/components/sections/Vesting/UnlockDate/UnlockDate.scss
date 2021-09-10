@@ -1,0 +1,49 @@
+@import '../../../../styles/vars';
+@import '../../../../styles/theme.scss';
+@import '../../../../styles/mixins/media.scss';
+
+.unlock-date {
+  padding: 14px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  background: var(--background-secondary);
+  border: 1px solid $yellow;
+  border-radius: 10px;
+
+  &_btn {
+    background: rgba(0, 0, 0, 0);
+
+    span {
+      font-size: 19px;
+      font-weight: 400;
+    }
+    @include b('mobile') {
+      padding: 5px;
+
+      width: 100%;
+
+      span {
+        font-size: 14px;
+        text-align: center;
+
+        img {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &_btn:hover,
+  &_btn:focus {
+    background: rgba(0, 0, 0, 0);
+  }
+  @include b('mobile') {
+    padding: 10px;
+
+    width: 100%;
+  }
+}

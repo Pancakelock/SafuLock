@@ -1,0 +1,128 @@
+.h1 {
+  font-size: 30px;
+  line-height: 41px;
+
+  @include b('tablet') {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+.h2 {
+  font-size: 20px;
+  line-height: 28px;
+
+  @include b('tablet') {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.h3 {
+  font-size: 18px;
+  line-height: 25px;
+  @include b('tablet') {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.h4 {
+  font-size: 13px;
+  line-height: 17px;
+  @include b('tablet') {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.h24 {
+  font-size: 24px;
+  @include b('tablet') {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.text {
+  font-size: 16px;
+  line-height: 22px;
+  @include b('tablet') {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &-upper {
+    text-transform: uppercase;
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-left {
+    width: 100%;
+
+    text-align: left;
+  }
+
+  &-normal {
+    font-weight: 400;
+  }
+
+  &-bold-semi {
+    font-weight: 600;
+  }
+
+  &-bold-e {
+    font-weight: 800;
+  }
+
+  &-bold {
+    font-weight: 900;
+  }
+
+  &-white {
+    color: var(--text-white-gray);
+
+    &-btn {
+      color: $white-btn;
+    }
+
+    &-drop {
+      color: $white-drop;
+    }
+
+    &-black {
+      color: var(--text-white-black);
+    }
+  }
+
+  &-yellow {
+    color: $yellow;
+
+    &-l {
+      color: $yellow-l;
+    }
+
+    &-black {
+      color: var(--text-yellow-black);
+    }
+
+    &-white {
+      color: var(--text-yellow-white);
+    }
+  }
+
+  &-black {
+    color: $black;
+  }
+
+  &-gray {
+    color: var(--text-gray-black);
+
+    &-const {
+      color: $gray-txt;
+    }
+  }
+}

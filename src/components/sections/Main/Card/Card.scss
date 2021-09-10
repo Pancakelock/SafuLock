@@ -1,0 +1,52 @@
+@import '../../../../styles/theme.scss';
+@import '../../../../styles/mixins/media.scss';
+
+.card-main {
+  margin: 10px 0;
+  padding: 25px 25px 25px 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  min-width: 350px;
+  max-width: 350px;
+
+  background: var(--background-secondary);
+  border: 1px solid var(--card-border);
+
+  @include b('tablet') {
+    margin: 0;
+  }
+
+  @include b('mobile') {
+    min-width: 100%;
+  }
+
+  &-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    width: 100%;
+
+    span {
+      padding: 5px 0;
+
+      width: fit-content;
+
+      text-align: right;
+    }
+  }
+
+  &-left {
+    img {
+      width: 60px;
+      @include b('tablet') {
+        width: 50px;
+      }
+    }
+  }
+}
